@@ -6,13 +6,30 @@
     box-sizing: border-box;
 }
 
+/* Main */
+main {
+    background-color: #3E4349;
+}
+
+/* Environment */
+#horizon {
+    position: absolute;
+    top: 58vh;
+    left: 0;
+    width: 100vw;
+    height: 4px;
+    background-color: #5b6065;
+    filter: blur(5px);
+}
+
 #game-area {
+    position: relative; /* Enables z-index to take effect */
+    z-index: 1; /* Place the game area on top of the background */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100vw;
-    background-color: #3E4349;
 }
 
 /* Bear */
