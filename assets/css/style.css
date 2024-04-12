@@ -83,7 +83,6 @@ main {
     position: relative;
     text-align: center;
     width: 100%;
-    height: 100%;
     color: #98a4ab;
     font-weight: 300;
     font-size: 90%;
@@ -91,7 +90,7 @@ main {
 }
 
 #rage-meter h3 em {
-    font-family: "Luckiest Guy", cursive;
+    font-family: "Luckiest Guy", sans-serif;
     font-size: 120%;
     font-weight: 100;
     color: #d5dfe4;
@@ -110,4 +109,37 @@ main {
 #bear img {
     height: 33vh;
     width: auto; /* Force img scale proportionally */
+}
+
+/* Poke button */
+#poke-button {
+    position: absolute;
+    bottom: 17vh;
+    right: 16vw;
+    width: 10vw;
+    height: 10vw;
+    cursor: pointer;
+    border: 4px solid #ffffff31;
+    border-radius: 50%;
+    background-color: #ffffff1f;
+}
+#poke-button:hover {
+    border: 4px solid #ffffff;
+}
+
+#poke-button img {
+    width: 68%;
+    height: 68%;
+}
+
+#poke-button h3 {
+    position: absolute;
+    bottom: -30px;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    font-family: "Luckiest Guy", sans-serif;
+    font-size: 120%;
+    font-weight: 100;
+    color: #d5dfe4;
 }
