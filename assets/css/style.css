@@ -8,40 +8,60 @@
 
 /* Main */
 main {
+    /* Cover the entire screen and align all elements to center */
+    display: flex;
+    height: 100vh;
+    width: 100vw;
     background-color: #3E4349;
 }
 
-/* Environment */
-#horizon {
+/* Background environment */
+#background-environment {
+    display: flex;
     position: absolute;
-    top: 58vh;
-    left: 0;
-    width: 100vw;
-    height: 4px;
-    background-color: #5b6065;
-    filter: blur(5px);
+    width: inherit;
+    height: 60vh;
+    justify-content: center;
+    overflow: hidden;
 }
 
+/* Environment image accessed with id to simplify future implementations */
+#mountains {
+    position: absolute;
+    bottom: 0;
+    height: auto;
+    width: 55vw;
+}
+
+/* Horizon */
+#horizon {
+    position: absolute; 
+    bottom: 0;
+    left: 0;   
+    width: inherit;
+    height: 5px;
+    background-color: #4c5054;
+    filter: blur(3px);
+}
+
+/* Game area */
 #game-area {
     position: relative; /* Enables z-index to take effect */
-    z-index: 1; /* Place the game area on top of the background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    z-index: 1; /* Place the game area on top of the background environment */
     width: 100vw;
+    height: 100vh;
 }
 
 /* Bear */
 #bear {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 33vw;
-    height: 33vh;
+    align-items: center; 
+    width: inherit;
+    height: inherit;
 }
 
 #bear img {
     height: 33vh;
-    width: auto; /* Force img to fit inside container */
+    width: auto; /* Force img scale proportionally */
 }
