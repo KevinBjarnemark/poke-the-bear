@@ -1,0 +1,30 @@
+
+/* Override default styles added by the browser */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#game-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #3E4349;
+}
+
+/* Bear */
+#bear {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33vw;
+    height: 33vh;
+}
+
+#bear img {
+    height: 33vh;
+    width: auto; /* Force img to fit inside container */
+}
