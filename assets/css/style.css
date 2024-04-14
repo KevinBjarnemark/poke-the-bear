@@ -12,7 +12,7 @@
 
 /* Main */
 main {
-    /* Cover the entire screen and align all elements to center */
+    /* Cover the entire screen */
     display: flex;
     height: 100vh;
     width: 100vw;
@@ -48,12 +48,25 @@ main {
     filter: blur(3px);
 }
 
-/* Game area */
-#game-area {
-    position: relative; /* Enables z-index to take effect */
+/* Main area */
+.main-area {
+    position: absolute; /* Enables z-index to take effect */
     z-index: 1; /* Place the game area on top of the background environment */
     width: 100vw;
     height: 100vh;
+}
+
+/* Welcome screen */
+#welcome-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+} 
+
+/* Game area */
+#game-area {
+    display: none; /* Hidden by default on page load */
 }
 
 /* Rage meter */

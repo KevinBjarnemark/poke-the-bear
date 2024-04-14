@@ -1,7 +1,7 @@
 
 // Run when the DOM has finished loading
 document.addEventListener("DOMContentLoaded", function() {
-    runGame();
+    runWelcome();
 });
 
 /**
@@ -19,7 +19,21 @@ const waitMs = async (ms) => {
     });
 };
 
+/**
+ * This function handles the logic before the game runs 
+ */
+async function runWelcome () {
+    await waitMs(3000);
+    // Hide the welcome screen
+    document.getElementById("welcome-screen").style.display = "none";
+    // Show the game area
+    document.getElementById("game-area").style.display = "block"; 
+    runGame();
+}
+
 function runGame () {
+    document.getElementById("poke-button").addEventListener("click", handlePoke);
+
     let rageMeter = 0; // 0 - 100
     let filledRageMeterElement = document.getElementById("filled-rage-meter");
     let bearImage = document.getElementById("bear").children[0];
@@ -53,5 +67,4 @@ function runGame () {
             filledRageMeterElement.style.width = `${rageMeter}%`;
         }
     }
-    document.getElementById("poke-button").addEventListener("click", handlePoke);
 }
