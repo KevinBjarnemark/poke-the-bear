@@ -71,14 +71,28 @@ main {
     align-items: center;
 }
 
-#player-list-container {
+/* Player list outer-most container  */ 
+#game-setup > div {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#player-list-container {
     max-height: 40vh;
     overflow-y: auto; /* Adds a scroll bar when exceeding the max-height */
-    border: 2px solid #ffffff20;
     border-radius: 4px;
     padding: 5px;
+    background-color: #383c41;
+    border: 1px solid #ffffff20;
+}
+
+#player-list > div {
+    background-color: #565c64;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px 0;
 }
 
 /* Game area */
