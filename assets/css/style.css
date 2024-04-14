@@ -253,6 +253,9 @@ button {
 #poke-button:hover {
     border: 4px solid #ffffff;
 }
+#poke-button:disabled {
+    cursor: not-allowed;
+}
 
 #poke-button img {
     width: 68%;

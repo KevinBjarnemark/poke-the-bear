@@ -114,7 +114,8 @@ function resetGame () {
 }
 
 function runGame (players) {
-    document.getElementById("poke-button").addEventListener("click", handlePoke);
+    let pokeButtonElement = document.getElementById("poke-button");
+    pokeButtonElement.addEventListener("click", handlePoke);
 
     const choosenPlayer = chooseRandomPlayer(players);
     document.getElementById("player-hint").innerText = 
@@ -126,6 +127,7 @@ function runGame (players) {
     let bearImage = document.getElementById("bear").children[0];
 
     async function handlePoke () {
+        pokeButtonElement.disabled = true; // Disable poke button
         const choosenPlayer = chooseRandomPlayer(alivePlayers);
 
         document.getElementById("player-hint").innerText = 
@@ -146,23 +148,22 @@ function runGame (players) {
             // Set the css width (limited)
             filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
         }else{
-            // Show player hint
-
-            
             // Remove player from the game 
             alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
             if (alivePlayers.length === 1){
                 document.getElementById("player-hint").innerText = 
                     `${alivePlayers[0]}, you won!`;
             }else {
+                // Show player hint
                 document.getElementById("player-hint").innerText = 
                     `Sorry ${choosenPlayer}, you're out!`;
             }
-
             await waitMs(5000); // Wait 5 seconds before resetting the game
             rageMeter = 0; // Reset to 0
             filledRageMeterElement.style.width = `${rageMeter}%`;
             resetGame();
         }
+
+        pokeButtonElement.disabled = false; // Enable poke button
     }
 }
