@@ -12,10 +12,11 @@ function runGame () {
     function handlePoke () {
         // Update the rage meter and adjust the css width accordingly
         if (rageMeter < 100) {
-            rageMeter+=10; // Increment by 10
-            filledRageMeterElement.style.width = `${rageMeter}%`;
+            rageMeter += Math.random() * 15; // Increment by 0-15
+            // Set the css width (limited)
+            filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
         }else{
-            rageMeter = 0;// Reset to 0
+            rageMeter = 0; // Reset to 0
             filledRageMeterElement.style.width = `${rageMeter}%`;
         }
     }
