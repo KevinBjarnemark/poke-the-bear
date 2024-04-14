@@ -37,6 +37,16 @@ async function runWelcome () {
             username = e.target.value;
     });
 
+    // Play button listener
+    document.getElementById("play-button").addEventListener("click", function() {
+        // Hide the game set up 
+        document.getElementById("game-setup").style.display = "none";
+        // Show the game area
+        document.getElementById("game-area").style.display = "block";
+        // Run game
+        runGame();
+    });
+
     document.getElementById("add-player-button").addEventListener("click", function() {
         // Create player element
         let playerElement = document.createElement("div");
