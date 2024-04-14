@@ -31,6 +31,14 @@ async function runWelcome () {
     // Get the player list element
     let playerListElement = document.getElementById("player-list");
     let playButtonErrorElement = document.getElementById("play-button-error");
+    let addPlayerErrorElement = document.getElementById("add-player-error");
+
+    function resetPlayButtonError () {
+        playButtonErrorElement.innerText = "";
+    }
+    function resetAddPlayerError () {
+        addPlayerErrorElement.innerText = "";
+    }
 
     let username = "";
     document.getElementById("username-input").
@@ -46,27 +54,47 @@ async function runWelcome () {
             document.getElementById("game-setup").style.display = "none";
             // Show the game area
             document.getElementById("game-area").style.display = "block";
-            // Run game
             runGame();
         }else {// Set play button error message
             playButtonErrorElement.innerText = "Please add another player";
+            resetAddPlayerError() // Keep UI minimalistic
         }
-
     });
 
     document.getElementById("add-player-button").addEventListener("click", function() {
-        // Create player element
-        let playerElement = document.createElement("div");
-        playerElement.innerText = username; // Set player name
-        // Push player element to container
-        playerListElement.appendChild(playerElement);
-        username = ""; // Reset username
-        document.getElementById("username-input").value = "";
-
-        // Reset the play button error if 2 players are added
-        if (playerListElement.children.length > 1) {
-            playButtonErrorElement.innerText = "";
+        switch(true){
+            // Username length is less than 1
+            case username.length < 1: {
+                addPlayerErrorElement.innerText = "Username has to be at least 1 character";
+                resetPlayButtonError(); // Keep UI minimalistic
+                break;
+            }
+            // There are more than 10 players
+            case playerListElement.children.length > 10: {
+                addPlayerErrorElement.innerText = "The limit for this game is 10 players";
+                resetPlayButtonError(); // Keep UI minimalistic
+                break;
+            }
+            // Run if validation passes
+            default: {
+                addPlayerToList();
+                break;
+            }
         }
+
+        function addPlayerToList () {
+            // Create player element
+            let playerElement = document.createElement("div");
+            playerElement.innerText = username; // Set player name
+            // Push player element to container
+            playerListElement.appendChild(playerElement);
+            username = ""; // Reset username
+            document.getElementById("username-input").value = "";
+            // Reset errors
+            resetAddPlayerError();
+            resetPlayButtonError();
+        }
+       
     });
 }
 
@@ -80,7 +108,6 @@ function runGame () {
     async function handlePoke () {
         // Change the bear image at specified levels
         switch (true) {
-            default: bearImage = "/assets/images/bear/bear_0.png";
             case rageMeter < 50: {
                 bearImage.src = "/assets/images/bear/bear_0.png";
                 break;
@@ -91,6 +118,10 @@ function runGame () {
             }
             case rageMeter >= 100: {
                 bearImage.src = "/assets/images/bear/bear_100.png";
+                break;
+            }
+            default: {
+                bearImage = "/assets/images/bear/bear_0.png";
                 break;
             }
         }
