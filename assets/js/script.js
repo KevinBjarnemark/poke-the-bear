@@ -31,12 +31,20 @@ async function runWelcome () {
     // Get the player list element
     let playerListElement = document.getElementById("player-list");
 
+    let username = "";
+    document.getElementById("username-input").
+        addEventListener("change", function(e) {
+            username = e.target.value;
+    });
+
     document.getElementById("add-player-button").addEventListener("click", function() {
         // Create player element
         let playerElement = document.createElement("div");
-        playerElement.innerText = "Test"; // Set player name
+        playerElement.innerText = username; // Set player name
         // Push player element to container
-        playerListElement.appendChild(playerElement); 
+        playerListElement.appendChild(playerElement);
+        username = ""; // Reset username
+        document.getElementById("username-input").value = "";
     });
 }
 

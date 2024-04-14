@@ -22,7 +22,8 @@
     <main>
         <!-- Environment (background) -->
         <div id="background-environment">
-            <img id="mountains" src="assets/images/environment/mountains.png" width="1080" height="168" 
+            <img id="mountains" src="assets/images/environment/mountains.png" 
+                width="1080" height="168" 
                 alt="Mountains in the background">
             <div id="horizon"></div>
         </div>
@@ -41,9 +42,14 @@
                     <div id="player-list"></div>
                 </div>
             </div>
-            <button id="add-player-button">
-                <h3>Add player</h3>
-            </button>
+            <!-- Add player component -->
+            <section id="add-player">
+                <input type="text" name="username" 
+                    id="username-input"></input>
+                <button id="add-player-button">
+                    <h3>Add player</h3>
+                </button>
+            </section>
         </div>
         <!-- Game area -->
         <div id="game-area" class="main-area">

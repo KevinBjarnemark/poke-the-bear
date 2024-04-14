@@ -36,6 +36,14 @@ main {
     background-color: #3E4349;
 }
 
+/* General styles */
+
+input {
+    background-color: #dee4eb;
+    border: transparent;
+    padding: 5px 0;
+}
+
 /* Background environment */
 #background-environment {
     display: flex;
@@ -86,6 +94,24 @@ main {
     display: none; /* Hidden by default */
     justify-content: center;
     align-items: center;
+}
+
+/* Add player section */
+#add-player {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Add player button */
+#add-player-button {
+    cursor: pointer;
+    padding: 4px 0;
+    border: 1px solid #ffffff31;
+    background-color: #ffffff1f;
+    color: #ffffff
+}
+#add-player-button:hover {
+    background-color: #ffffff30;
 }
 
 /* Player list outer-most container  */ 
