@@ -54,6 +54,7 @@ main {
     z-index: 1; /* Place the game area on top of the background environment */
     width: 100vw;
     height: 100vh;
+    color: #ffffff;
 }
 
 /* Welcome screen */
@@ -61,12 +62,28 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ffffff;
-} 
+}
+
+/* Game setup */
+#game-setup {
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+}
+
+#player-list-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 40vh;
+    overflow-y: auto; /* Adds a scroll bar when exceeding the max-height */
+    border: 2px solid #ffffff20;
+    border-radius: 4px;
+    padding: 5px;
+}
 
 /* Game area */
 #game-area {
-    display: none; /* Hidden by default on page load */
+    display: none; /* Hidden by default */
 }
 
 /* Rage meter */

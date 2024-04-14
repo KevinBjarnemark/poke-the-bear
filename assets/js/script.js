@@ -23,12 +23,24 @@ const waitMs = async (ms) => {
  * This function handles the logic before the game runs 
  */
 async function runWelcome () {
-    await waitMs(3000);
+    let playerList = ["The whisperer", "breaker of worlds", "Josh"];
+
+    await waitMs(1000);
     // Hide the welcome screen
     document.getElementById("welcome-screen").style.display = "none";
-    // Show the game area
-    document.getElementById("game-area").style.display = "block"; 
-    runGame();
+    // Show game setup
+    document.getElementById("game-setup").style.display = "flex";
+    // Get the player list element
+    let playerListElement = document.getElementById("player-list");
+
+    // Display all players in a list
+    for (let i = 0; i < playerList.length; i++){
+        // Create player element
+        let playerElement = document.createElement("div");
+        playerElement.innerText = playerList[i]; // Set player name
+        // Push player element to container
+        playerListElement.appendChild(playerElement); 
+    }
 }
 
 function runGame () {
