@@ -100,7 +100,6 @@ async function runWelcome () {
             resetAddPlayerError();
             resetPlayButtonError();
         }
-       
     });
 }
 
@@ -109,17 +108,25 @@ function chooseRandomPlayer (players) {
     return players[choosenPlayerIndex];
 }
 
+function resetGame () {
+    document.getElementById("game-area").style.display = "none";
+    runWelcome();
+}
+
 function runGame (players) {
     document.getElementById("poke-button").addEventListener("click", handlePoke);
 
-    let alivePlayers = players;
+    const choosenPlayer = chooseRandomPlayer(players);
+    document.getElementById("player-hint").innerText = 
+        `${choosenPlayer} it's your turn!`;
 
+    let alivePlayers = players;
     let rageMeter = 0; // 0 - 100
     let filledRageMeterElement = document.getElementById("filled-rage-meter");
     let bearImage = document.getElementById("bear").children[0];
 
     async function handlePoke () {
-        const choosenPlayer = chooseRandomPlayer(players);
+        const choosenPlayer = chooseRandomPlayer(alivePlayers);
 
         document.getElementById("player-hint").innerText = 
             `${choosenPlayer} it's your turn!`;
@@ -131,11 +138,6 @@ function runGame (players) {
             bearImage.src = "/assets/images/bear/bear_50.png";
         }else if (rageMeter >= 100) {
             bearImage.src = "/assets/images/bear/bear_100.png";
-            // Remove player from the game 
-            alivePlayers.splice(choosenPlayer, 1);
-            document.getElementById("player-hint").innerText = 
-                `Sorry ${choosenPlayer}, you're out!`;
-            console.log("Alive players:", alivePlayers);
         }
 
         // Update the rage meter and adjust the css width accordingly
@@ -144,9 +146,23 @@ function runGame (players) {
             // Set the css width (limited)
             filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
         }else{
+            // Show player hint
+
+            
+            // Remove player from the game 
+            alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
+            if (alivePlayers.length === 1){
+                document.getElementById("player-hint").innerText = 
+                    `${alivePlayers[0]}, you won!`;
+            }else {
+                document.getElementById("player-hint").innerText = 
+                    `Sorry ${choosenPlayer}, you're out!`;
+            }
+
             await waitMs(5000); // Wait 5 seconds before resetting the game
             rageMeter = 0; // Reset to 0
             filledRageMeterElement.style.width = `${rageMeter}%`;
+            resetGame();
         }
     }
 }
