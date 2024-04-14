@@ -41,6 +41,7 @@ input {
     background-color: #dee4eb;
     border: transparent;
     padding: 5px 0;
+    min-width: 260px;
 }
 
 button {
@@ -61,7 +62,9 @@ button {
 .error-message {
     color: #ff5d5d;
     padding: 8px 0;
-    font-size: 14px;
+    font-size: 13px;
+    text-align: center;
+    min-height: 35px; /* Prevent layout shifts */
 }
 
 /* Background environment */
@@ -168,6 +171,17 @@ button {
 /* Game area */
 #game-area {
     display: none; /* Hidden by default */
+}
+
+/* Player hint */
+#player-hint {
+    display: flex;
+    position: absolute;
+    top: 10vh;
+    right: 17vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Rage meter */

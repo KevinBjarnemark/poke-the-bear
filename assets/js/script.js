@@ -54,7 +54,13 @@ async function runWelcome () {
             document.getElementById("game-setup").style.display = "none";
             // Show the game area
             document.getElementById("game-area").style.display = "block";
-            runGame();
+
+            // Pass all players into the game
+            let players = [];
+            for (i of playerListElement.children) {
+                players.push(i.innerText);
+            }
+            runGame(players);
         }else {// Set play button error message
             playButtonErrorElement.innerText = "Please add another player";
             resetAddPlayerError() // Keep UI minimalistic
@@ -98,14 +104,26 @@ async function runWelcome () {
     });
 }
 
-function runGame () {
+function chooseRandomPlayer (players) {
+    const choosenPlayerIndex = Math.floor(Math.random() * players.length);
+    return players[choosenPlayerIndex];
+}
+
+function runGame (players) {
     document.getElementById("poke-button").addEventListener("click", handlePoke);
+
+    let alivePlayers = players;
 
     let rageMeter = 0; // 0 - 100
     let filledRageMeterElement = document.getElementById("filled-rage-meter");
     let bearImage = document.getElementById("bear").children[0];
 
     async function handlePoke () {
+        const choosenPlayer = chooseRandomPlayer(players);
+
+        document.getElementById("player-hint").innerText = 
+            `${choosenPlayer} it's your turn!`;
+
         // Change the bear image at specified levels
         if (rageMeter < 50) {
             bearImage.src = "/assets/images/bear/bear_0.png";
@@ -113,6 +131,11 @@ function runGame () {
             bearImage.src = "/assets/images/bear/bear_50.png";
         }else if (rageMeter >= 100) {
             bearImage.src = "/assets/images/bear/bear_100.png";
+            // Remove player from the game 
+            alivePlayers.splice(choosenPlayer, 1);
+            document.getElementById("player-hint").innerText = 
+                `Sorry ${choosenPlayer}, you're out!`;
+            console.log("Alive players:", alivePlayers);
         }
 
         // Update the rage meter and adjust the css width accordingly
