@@ -10,6 +10,23 @@
     font-style: normal; /* Prevent default cursive styles */
 }
 
+/* Scrollbar style */
+::-webkit-scrollbar {
+    width: 5px; 
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #8a8d91; 
+    border-radius: 6px;
+}
+::-webkit-scrollbar-corner {
+    background-color: #606468; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #76797b;
+}
+
 /* Main */
 main {
     /* Cover the entire screen */
