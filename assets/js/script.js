@@ -107,23 +107,12 @@ function runGame () {
 
     async function handlePoke () {
         // Change the bear image at specified levels
-        switch (true) {
-            case rageMeter < 50: {
-                bearImage.src = "/assets/images/bear/bear_0.png";
-                break;
-            }
-            case rageMeter >= 50 && rageMeter < 100: {
-                bearImage.src = "/assets/images/bear/bear_50.png";
-                break;
-            }
-            case rageMeter >= 100: {
-                bearImage.src = "/assets/images/bear/bear_100.png";
-                break;
-            }
-            default: {
-                bearImage = "/assets/images/bear/bear_0.png";
-                break;
-            }
+        if (rageMeter < 50) {
+            bearImage.src = "/assets/images/bear/bear_0.png";
+        }else if (rageMeter >= 50 && rageMeter < 100) {
+            bearImage.src = "/assets/images/bear/bear_50.png";
+        }else if (rageMeter >= 100) {
+            bearImage.src = "/assets/images/bear/bear_100.png";
         }
 
         // Update the rage meter and adjust the css width accordingly
