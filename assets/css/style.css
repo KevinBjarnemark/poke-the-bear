@@ -58,6 +58,12 @@ button {
     background-color: #ffffff30;
 }
 
+.error-message {
+    color: #ff5d5d;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
 /* Background environment */
 #background-environment {
     display: flex;

@@ -30,6 +30,7 @@ async function runWelcome () {
     document.getElementById("game-setup").style.display = "flex";
     // Get the player list element
     let playerListElement = document.getElementById("player-list");
+    let playButtonErrorElement = document.getElementById("play-button-error");
 
     let username = "";
     document.getElementById("username-input").
@@ -39,12 +40,18 @@ async function runWelcome () {
 
     // Play button listener
     document.getElementById("play-button").addEventListener("click", function() {
-        // Hide the game set up 
-        document.getElementById("game-setup").style.display = "none";
-        // Show the game area
-        document.getElementById("game-area").style.display = "block";
-        // Run game
-        runGame();
+        // Ensure that at least 2 players are added
+        if (playerListElement.children.length > 1) {
+            // Hide the game set up 
+            document.getElementById("game-setup").style.display = "none";
+            // Show the game area
+            document.getElementById("game-area").style.display = "block";
+            // Run game
+            runGame();
+        }else {// Set play button error message
+            playButtonErrorElement.innerText = "Please add another player";
+        }
+
     });
 
     document.getElementById("add-player-button").addEventListener("click", function() {
@@ -55,6 +62,11 @@ async function runWelcome () {
         playerListElement.appendChild(playerElement);
         username = ""; // Reset username
         document.getElementById("username-input").value = "";
+
+        // Reset the play button error if 2 players are added
+        if (playerListElement.children.length > 1) {
+            playButtonErrorElement.innerText = "";
+        }
     });
 }
 
