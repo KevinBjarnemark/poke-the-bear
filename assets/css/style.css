@@ -74,20 +74,28 @@ main {
 /* Player list outer-most container  */ 
 #game-setup > div {
     display: flex;
+    position: absolute;
+    top: 6vh;
+    right: 6vw;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+/* Container for all players */
 #player-list-container {
-    max-height: 40vh;
-    overflow-y: auto; /* Adds a scroll bar when exceeding the max-height */
-    border-radius: 4px;
+    min-width: 30vh;
+    max-width: 40vh;
+    min-height: 15vh;
+    max-height: 37vh;
     padding: 5px;
+    overflow-y: auto; /* Adds a scroll bar when exceeding the max-height */
     background-color: #383c41;
     border: 1px solid #ffffff20;
+    border-radius: 4px;
 }
 
+/* The player element */
 #player-list > div {
     background-color: #565c64;
     border-radius: 4px;
