@@ -6,43 +6,43 @@ document.addEventListener("DOMContentLoaded", function() {
     runWelcome();
 });
 
-/**
- * This function handles the logic before the game runs 
- */
 async function runWelcome () {
     await waitMs(1000);
-    // Hide the welcome screen
+
+    // Hide the welcome screen and show game setup
     document.getElementById("welcome-screen").style.display = "none";
-    // Show game setup
     document.getElementById("game-setup").style.display = "flex";
+
     // Get the player list element
     let playerListElement = document.getElementById("player-list");
     let playButtonErrorElement = document.getElementById("play-button-error");
     let addPlayerErrorElement = document.getElementById("add-player-error");
 
+    // Listen to the username input
     let username = "";
     document.getElementById("username-input").
         addEventListener("change", function(e) {
             username = e.target.value;
-    });
+        });
 
-    // Play button listener
-    document.getElementById("play-button").addEventListener("click", function() {
-        // Ensure that at least 2 players are added
-        if (playerListElement.children.length > 1) {
-            // Hide the game set up 
-            document.getElementById("game-setup").style.display = "none";
-            // Show the game area
-            document.getElementById("game-area").style.display = "block";
+    // Listen to to play button clicks
+    document.getElementById("play-button").
+        addEventListener("click", function() {
+            // Create the players array
+            const playersArray = getChildrenValuesFromElement(playerListElement, "innerText");
 
-            // Pass all players into the game
-            const players = getChildrenValuesFromElement(playerListElement, "innerText");
-            runGame(players);
-        }else {
-            // Set play button error message
-            setInnerText(playButtonErrorElement, "Please add another player");
-            setInnerText(addPlayerErrorElement, ""); // Keep UI minimalistic
-        }
+            // Run if at least 2 players have been added
+            if (playersArray.length > 1) {
+                // Hide the game set up and show the game area
+                document.getElementById("game-setup").style.display = "none";
+                document.getElementById("game-area").style.display = "block";
+                // Pass all players into the game
+                runGame(playersArray);
+            }else {
+                // Set play button error message
+                setInnerText(playButtonErrorElement, "Please add another player");
+                setInnerText(addPlayerErrorElement, ""); // Keep UI minimalistic
+            }
     });
 
     document.getElementById("add-player-button").addEventListener("click", function() {
@@ -89,9 +89,9 @@ async function runWelcome () {
     });
 }
 
-function chooseRandomPlayer (players) {
-    const choosenPlayerIndex = Math.floor(Math.random() * players.length);
-    return players[choosenPlayerIndex];
+function chooseRandomPlayer (playersArray) {
+    const choosenPlayerIndex = Math.floor(Math.random() * playersArray.length);
+    return playersArray[choosenPlayerIndex];
 }
 
 function resetGame () {
@@ -99,15 +99,15 @@ function resetGame () {
     runWelcome();
 }
 
-function runGame (players) {
+function runGame (playersArray) {
     let pokeButtonElement = document.getElementById("poke-button");
     pokeButtonElement.addEventListener("click", handlePoke);
 
-    const choosenPlayer = chooseRandomPlayer(players);
+    const choosenPlayer = chooseRandomPlayer(playersArray);
     let playerHintElement = document.getElementById("player-hint");
     setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
 
-    let alivePlayers = players;
+    let alivePlayers = playersArray;
     let rageMeter = 0; // 0 - 100
     let filledRageMeterElement = document.getElementById("filled-rage-meter");
     let bearImage = document.getElementById("bear").children[0];

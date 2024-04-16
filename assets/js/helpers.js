@@ -1,8 +1,8 @@
 
 /**
- * This function is tuned to extract a specific value from a child 
+ * This function is 'tuned' to extract a specified value from a child 
  * inside an HTML element. It extracts each value from each child 
- * and outputs an array containing all the children values
+ * and outputs an array containing all the children values.
  * 
  * @param {object} childrenObj The object that contains the children.
  * @param {string} entry The entry that should be listed in the 
