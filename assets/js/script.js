@@ -5,6 +5,25 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 /**
+ * This function is tuned to extract a specific value from a child 
+ * inside an HTML element. It extracts each value from each child 
+ * and outputs an array containing all the children values
+ * 
+ * @param {object} childrenObj The object that contains the children.
+ * @param {string} entry The entry that should be listed in the 
+ * outputed array. 
+ * @returns {Array} The array containing the values extracted from 
+ * the children's entries.
+ */
+function getChildrenValuesFromElement (childrenObj, entry) {
+    let result = [];
+    for (i of childrenObj["children"]) {
+        result.push(i[entry]);
+    }
+    return result;
+}
+
+/**
  * Waits for a specified number of milliseconds.
  * This function can be used to introduce a delay in asynchronous operations.
  *
@@ -56,10 +75,7 @@ async function runWelcome () {
             document.getElementById("game-area").style.display = "block";
 
             // Pass all players into the game
-            let players = [];
-            for (i of playerListElement.children) {
-                players.push(i.innerText);
-            }
+            const players = getChildrenValuesFromElement(playerListElement, "innerText");
             runGame(players);
         }else {// Set play button error message
             playButtonErrorElement.innerText = "Please add another player";
@@ -81,9 +97,17 @@ async function runWelcome () {
                 resetPlayButtonError(); // Keep UI minimalistic
                 break;
             }
+            // Username already exists
+            case getChildrenValuesFromElement(playerListElement, "innerText").includes(
+                username): {
+                addPlayerErrorElement.innerText = "Username already exists";
+                resetPlayButtonError(); // Keep UI minimalistic
+                break;
+            }
             // Run if validation passes
             default: {
                 addPlayerToList();
+                console.log()
                 break;
             }
         }
