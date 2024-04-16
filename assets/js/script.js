@@ -1,10 +1,10 @@
-import { waitMs, getChildrenValuesFromElement } from './helpers.js';
+import { waitMs, setInnerText, 
+    getChildrenValuesFromElement } from './helpers.js';
 
 // Run when the DOM has finished loading
 document.addEventListener("DOMContentLoaded", function() {
     runWelcome();
 });
-
 
 /**
  * This function handles the logic before the game runs 
@@ -19,13 +19,6 @@ async function runWelcome () {
     let playerListElement = document.getElementById("player-list");
     let playButtonErrorElement = document.getElementById("play-button-error");
     let addPlayerErrorElement = document.getElementById("add-player-error");
-
-    function resetPlayButtonError () {
-        playButtonErrorElement.innerText = "";
-    }
-    function resetAddPlayerError () {
-        addPlayerErrorElement.innerText = "";
-    }
 
     let username = "";
     document.getElementById("username-input").
@@ -45,9 +38,10 @@ async function runWelcome () {
             // Pass all players into the game
             const players = getChildrenValuesFromElement(playerListElement, "innerText");
             runGame(players);
-        }else {// Set play button error message
-            playButtonErrorElement.innerText = "Please add another player";
-            resetAddPlayerError() // Keep UI minimalistic
+        }else {
+            // Set play button error message
+            setInnerText(playButtonErrorElement, "Please add another player");
+            setInnerText(addPlayerErrorElement, ""); // Keep UI minimalistic
         }
     });
 
@@ -55,21 +49,21 @@ async function runWelcome () {
         switch(true){
             // Username length is less than 1
             case username.length < 1: {
-                addPlayerErrorElement.innerText = "Username has to be at least 1 character";
-                resetPlayButtonError(); // Keep UI minimalistic
+                setInnerText(addPlayerErrorElement, "Username has to be at least 1 character");
+                setInnerText(playButtonErrorElement, "");
                 break;
             }
             // There are more than 10 players
             case playerListElement.children.length > 10: {
-                addPlayerErrorElement.innerText = "The limit for this game is 10 players";
-                resetPlayButtonError(); // Keep UI minimalistic
+                setInnerText(addPlayerErrorElement, "The limit for this game is 10 players");
+                setInnerText(playButtonErrorElement, "");
                 break;
             }
             // Username already exists
             case getChildrenValuesFromElement(playerListElement, "innerText").includes(
                 username): {
-                addPlayerErrorElement.innerText = "Username already exists";
-                resetPlayButtonError(); // Keep UI minimalistic
+                setInnerText(addPlayerErrorElement, "Username already exists");
+                setInnerText(playButtonErrorElement, "");
                 break;
             }
             // Run if validation passes
@@ -83,14 +77,14 @@ async function runWelcome () {
         function addPlayerToList () {
             // Create player element
             let playerElement = document.createElement("div");
-            playerElement.innerText = username; // Set player name
+            setInnerText(playerElement, username); // Set player name
             // Push player element to container
             playerListElement.appendChild(playerElement);
             username = ""; // Reset username
             document.getElementById("username-input").value = "";
             // Reset errors
-            resetAddPlayerError();
-            resetPlayButtonError();
+            setInnerText(addPlayerErrorElement, "");
+            setInnerText(playButtonErrorElement, "");
         }
     });
 }
@@ -110,8 +104,8 @@ function runGame (players) {
     pokeButtonElement.addEventListener("click", handlePoke);
 
     const choosenPlayer = chooseRandomPlayer(players);
-    document.getElementById("player-hint").innerText = 
-        `${choosenPlayer} it's your turn!`;
+    let playerHintElement = document.getElementById("player-hint");
+    setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
 
     let alivePlayers = players;
     let rageMeter = 0; // 0 - 100
@@ -122,8 +116,7 @@ function runGame (players) {
         pokeButtonElement.disabled = true; // Disable poke button
         const choosenPlayer = chooseRandomPlayer(alivePlayers);
 
-        document.getElementById("player-hint").innerText = 
-            `${choosenPlayer} it's your turn!`;
+        setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
 
         // Change the bear image at specified levels
         if (rageMeter < 50) {
@@ -142,13 +135,12 @@ function runGame (players) {
         }else{
             // Remove player from the game 
             alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
+
             if (alivePlayers.length === 1){
-                document.getElementById("player-hint").innerText = 
-                    `${alivePlayers[0]}, you won!`;
+                setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
             }else {
                 // Show player hint
-                document.getElementById("player-hint").innerText = 
-                    `Sorry ${choosenPlayer}, you're out!`;
+                setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
             }
             await waitMs(5000); // Wait 5 seconds before resetting the game
             rageMeter = 0; // Reset to 0

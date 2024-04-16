@@ -32,3 +32,13 @@ export const waitMs = async (ms) => {
         }, ms);
     });
 };
+
+/**
+ * Sets the inner text of an HTML element
+ * 
+ * @param {object} element The HTML object
+ * @param {string} text The text that should be inserted into the HTML object
+ */
+export function setInnerText (element, text) {
+    element["innerText"] = text;
+}
