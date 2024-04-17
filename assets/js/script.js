@@ -6,13 +6,30 @@ document.addEventListener("DOMContentLoaded", function() {
     runWelcome();
 });
 
+// Local helper functions
+function chooseRandomPlayer (playersArray) {
+    const choosenPlayerIndex = Math.floor(Math.random() * playersArray.length);
+    return playersArray[choosenPlayerIndex];
+}
+
+function resetGame () {
+    document.getElementById("game-area").style.display = "none";
+    runWelcome();
+}
+
+// Run the welcome screen
 async function runWelcome () {
     await waitMs(1000);
-
     // Hide the welcome screen and show game setup
     document.getElementById("welcome-screen").style.display = "none";
     document.getElementById("game-setup").style.display = "flex";
 
+    // Run the game setup
+    runGameSetup();
+}
+
+// Run the game set up
+async function runGameSetup () {
     // Get the player list element
     let playerListElement = document.getElementById("player-list");
     let playButtonErrorElement = document.getElementById("play-button-error");
@@ -43,7 +60,7 @@ async function runWelcome () {
                 setInnerText(playButtonErrorElement, "Please add another player");
                 setInnerText(addPlayerErrorElement, ""); // Keep UI minimalistic
             }
-    });
+        });
 
     document.getElementById("add-player-button").addEventListener("click", function() {
         switch(true){
@@ -69,7 +86,6 @@ async function runWelcome () {
             // Run if validation passes
             default: {
                 addPlayerToList();
-                console.log()
                 break;
             }
         }
@@ -89,34 +105,61 @@ async function runWelcome () {
     });
 }
 
-function chooseRandomPlayer (playersArray) {
-    const choosenPlayerIndex = Math.floor(Math.random() * playersArray.length);
-    return playersArray[choosenPlayerIndex];
-}
-
-function resetGame () {
-    document.getElementById("game-area").style.display = "none";
-    runWelcome();
-}
-
+// Run game
 function runGame (playersArray) {
-    let pokeButtonElement = document.getElementById("poke-button");
+    // Declare 'key' elements
+    const pokeButtonElement = document.getElementById("poke-button");
+    let filledRageMeterElement = document.getElementById("filled-rage-meter");
+    let bearImage = document.getElementById("bear").children[0];
+
+    // Listen to poke button clicks
     pokeButtonElement.addEventListener("click", handlePoke);
 
     const choosenPlayer = chooseRandomPlayer(playersArray);
     let playerHintElement = document.getElementById("player-hint");
     setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
 
+    // Reset all values before starting
     let alivePlayers = playersArray;
     let rageMeter = 0; // 0 - 100
-    let filledRageMeterElement = document.getElementById("filled-rage-meter");
-    let bearImage = document.getElementById("bear").children[0];
 
     async function handlePoke () {
-        pokeButtonElement.disabled = true; // Disable poke button
-        const choosenPlayer = chooseRandomPlayer(alivePlayers);
+        // Disable poke button to prevent unwanted user clicks
+        pokeButtonElement.disabled = true; 
 
+        /* Increment rage meter by 0-15 and set the css width 
+        accordingly */
+        rageMeter += Math.random() * 15;
+        filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
+
+        // Choose player randomly and set the player hint
+        const choosenPlayer = chooseRandomPlayer(alivePlayers);
         setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
+
+        // Handle game logic
+        if (rageMeter >= 100) {
+            // If there's only one player left, declare a winner 
+            if (alivePlayers.length === 1){
+                setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
+                await waitMs(5000); // Wait 5 seconds before resetting the game
+                resetGame();
+            }else {
+                // Remove player from the game and show hint
+                alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
+                setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
+                await waitMs(2000); // Wait 2 seconds
+
+                if (alivePlayers.length === 1){
+                    setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
+                    await waitMs(5000); // Wait 5 seconds before resetting the game
+                    resetGame();
+                }else{
+                    filledRageMeterElement.style.width = "0%";
+                    rageMeter = 0;
+                    setInnerText(playerHintElement, `${chooseRandomPlayer(alivePlayers)} it's your turn!`);
+                }
+            }
+        }
 
         // Change the bear image at specified levels
         if (rageMeter < 50) {
@@ -125,27 +168,6 @@ function runGame (playersArray) {
             bearImage.src = "/assets/images/bear/bear_50.png";
         }else if (rageMeter >= 100) {
             bearImage.src = "/assets/images/bear/bear_100.png";
-        }
-
-        // Update the rage meter and adjust the css width accordingly
-        if (rageMeter < 100) {
-            rageMeter += Math.random() * 15; // Increment by 0-15
-            // Set the css width (limited)
-            filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
-        }else{
-            // Remove player from the game 
-            alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
-
-            if (alivePlayers.length === 1){
-                setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
-            }else {
-                // Show player hint
-                setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
-            }
-            await waitMs(5000); // Wait 5 seconds before resetting the game
-            rageMeter = 0; // Reset to 0
-            filledRageMeterElement.style.width = `${rageMeter}%`;
-            resetGame();
         }
 
         pokeButtonElement.disabled = false; // Enable poke button
