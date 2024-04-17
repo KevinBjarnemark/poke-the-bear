@@ -132,6 +132,17 @@ function runGame (playersArray) {
         rageMeter += Math.random() * 15;
         filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
 
+        // Change the bear image at specified levels
+        let imageName;
+        if (rageMeter < 50) {
+            imageName = 0;
+        }else if (rageMeter < 100) {
+            imageName = 50;
+        }else {
+            imageName = 100;
+        }
+        bearImage.src = `/assets/images/bear/bear_${imageName}.png`;
+
         // Choose player randomly and set the player hint
         const choosenPlayer = chooseRandomPlayer(alivePlayers);
         setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
@@ -159,15 +170,6 @@ function runGame (playersArray) {
                     setInnerText(playerHintElement, `${chooseRandomPlayer(alivePlayers)} it's your turn!`);
                 }
             }
-        }
-
-        // Change the bear image at specified levels
-        if (rageMeter < 50) {
-            bearImage.src = "/assets/images/bear/bear_0.png";
-        }else if (rageMeter >= 50 && rageMeter < 100) {
-            bearImage.src = "/assets/images/bear/bear_50.png";
-        }else if (rageMeter >= 100) {
-            bearImage.src = "/assets/images/bear/bear_100.png";
         }
 
         pokeButtonElement.disabled = false; // Enable poke button
