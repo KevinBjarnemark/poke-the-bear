@@ -149,26 +149,20 @@ function runGame (playersArray) {
 
         // Handle game logic
         if (rageMeter >= 100) {
+            // Remove player from the game and show hint
+            alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
+            setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
+            await waitMs(2000); // Wait 2 seconds
+
             // If there's only one player left, declare a winner 
             if (alivePlayers.length === 1){
                 setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
                 await waitMs(5000); // Wait 5 seconds before resetting the game
                 resetGame();
-            }else {
-                // Remove player from the game and show hint
-                alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
-                setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
-                await waitMs(2000); // Wait 2 seconds
-
-                if (alivePlayers.length === 1){
-                    setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
-                    await waitMs(5000); // Wait 5 seconds before resetting the game
-                    resetGame();
-                }else{
-                    filledRageMeterElement.style.width = "0%";
-                    rageMeter = 0;
-                    setInnerText(playerHintElement, `${chooseRandomPlayer(alivePlayers)} it's your turn!`);
-                }
+            }else{
+                filledRageMeterElement.style.width = "0%";
+                rageMeter = 0;
+                setInnerText(playerHintElement, `${chooseRandomPlayer(alivePlayers)} it's your turn!`);
             }
         }
 
