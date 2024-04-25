@@ -12,6 +12,18 @@ function chooseRandomPlayer (playersArray) {
     return playersArray[choosenPlayerIndex];
 }
 
+/**
+ * This function will filter out a player from an array of 
+ * players 
+ * 
+ * @param {Array} playersList Declared as a let variable
+ * @param {string} playerName
+ * @returns {Array} 
+ */
+function removePlayer (playersList, playerName) {
+    return playersList.filter(player => player !== playerName); 
+}
+
 function resetGame () {
     document.getElementById("game-area").style.display = "none";
     runWelcome();
@@ -23,7 +35,6 @@ async function runWelcome () {
     // Hide the welcome screen and show game setup
     document.getElementById("welcome-screen").style.display = "none";
     document.getElementById("game-setup").style.display = "flex";
-
     // Run the game setup
     runGameSetup();
 }
@@ -46,7 +57,8 @@ async function runGameSetup () {
     document.getElementById("play-button").
         addEventListener("click", function() {
             // Create the players array
-            const playersArray = getChildrenValuesFromElement(playerListElement, "innerText");
+            const playersArray = getChildrenValuesFromElement(playerListElement, 
+                "innerText");
 
             // Run if at least 2 players have been added
             if (playersArray.length > 1) {
@@ -66,13 +78,15 @@ async function runGameSetup () {
         switch(true){
             // Username length is less than 1
             case username.length < 1: {
-                setInnerText(addPlayerErrorElement, "Username has to be at least 1 character");
+                setInnerText(addPlayerErrorElement, 
+                    "Username has to be at least 1 character");
                 setInnerText(playButtonErrorElement, "");
                 break;
             }
             // There are more than 10 players
             case playerListElement.children.length > 10: {
-                setInnerText(addPlayerErrorElement, "The limit for this game is 10 players");
+                setInnerText(addPlayerErrorElement, 
+                    "The limit for this game is 10 players");
                 setInnerText(playButtonErrorElement, "");
                 break;
             }
@@ -141,7 +155,7 @@ function runGame (playersArray) {
         }else {
             imageName = 100;
         }
-        bearImage.src = `/assets/images/bear/bear_${imageName}.png`;
+        bearImage.src = `assets/images/bear/bear_${imageName}.png`;
 
         // Choose player randomly and set the player hint
         const choosenPlayer = chooseRandomPlayer(alivePlayers);
@@ -150,7 +164,7 @@ function runGame (playersArray) {
         // Handle game logic
         if (rageMeter >= 100) {
             // Remove player from the game and show hint
-            alivePlayers = alivePlayers.filter(player => player !== choosenPlayer); 
+            alivePlayers = removePlayer(alivePlayers, choosenPlayer); 
             setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
             await waitMs(2000); // Wait 2 seconds
 
@@ -160,9 +174,11 @@ function runGame (playersArray) {
                 await waitMs(5000); // Wait 5 seconds before resetting the game
                 resetGame();
             }else{
+                // If there are players, reset the rage meter 
                 filledRageMeterElement.style.width = "0%";
                 rageMeter = 0;
-                setInnerText(playerHintElement, `${chooseRandomPlayer(alivePlayers)} it's your turn!`);
+                setInnerText(playerHintElement, 
+                    `${chooseRandomPlayer(alivePlayers)} it's your turn!`);
             }
         }
 
