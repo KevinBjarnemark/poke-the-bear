@@ -107,7 +107,20 @@ async function runGameSetup () {
         function addPlayerToList () {
             // Create player element
             let playerElement = document.createElement("div");
-            setInnerText(playerElement, username); // Set player name
+            // Set player name as innerText
+            setInnerText(playerElement, username); 
+
+            // Create a 'remove player button'
+            let removePlayerButton = document.createElement("button");
+            removePlayerButton.innerText = "X"; 
+            playerElement.appendChild(removePlayerButton);
+            // Listen to 'remove player clicks'
+            removePlayerButton.addEventListener("click", function() {
+                /* Remove the playerElement, 
+                note! this will remove the button aswell */
+                playerElement.remove(); 
+            });
+
             // Push player element to container
             playerListElement.appendChild(playerElement);
             username = ""; // Reset username
