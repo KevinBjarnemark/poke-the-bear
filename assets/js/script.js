@@ -1,5 +1,5 @@
 import { waitMs, setInnerText, 
-    getChildrenValuesFromElement } from './helpers.js';
+    getChildrenValuesFromSpan } from './helpers.js';
 
 // Run when the DOM has finished loading
 document.addEventListener("DOMContentLoaded", function() {
@@ -57,8 +57,8 @@ async function runGameSetup () {
     document.getElementById("play-button").
         addEventListener("click", function() {
             // Create the players array
-            const playersArray = getChildrenValuesFromElement(playerListElement, 
-                "innerText");
+            const playersArray = getChildrenValuesFromSpan(playerListElement, 
+                "textContent");
 
             // Run if at least 2 players have been added
             if (playersArray.length > 1) {
@@ -91,7 +91,7 @@ async function runGameSetup () {
                 break;
             }
             // Username already exists
-            case getChildrenValuesFromElement(playerListElement, "innerText").includes(
+            case getChildrenValuesFromSpan(playerListElement, "innerText").includes(
                 username): {
                 setInnerText(addPlayerErrorElement, "Username already exists");
                 setInnerText(playButtonErrorElement, "");
@@ -107,8 +107,11 @@ async function runGameSetup () {
         function addPlayerToList () {
             // Create player element
             let playerElement = document.createElement("div");
+
             // Set player name as innerText
-            setInnerText(playerElement, username); 
+            let usernameSpan = document.createElement("span");
+            setInnerText(usernameSpan, username);
+            playerElement.appendChild(usernameSpan);
 
             // Create a 'remove player button'
             let removePlayerButton = document.createElement("button");
