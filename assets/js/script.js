@@ -90,9 +90,9 @@ async function runGameSetup () {
                 break;
             }
             // There are more than 10 players
-            case playerListElement.children.length > 10: {
+            case playerListElement.children.length > 150: {
                 setInnerText(addPlayerErrorElement, 
-                    "The limit for this game is 10 players");
+                    "The limit for this game is 150 players");
                 setInnerText(playButtonErrorElement, "");
                 break;
             }
