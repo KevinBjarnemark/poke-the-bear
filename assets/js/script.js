@@ -76,10 +76,16 @@ async function runGameSetup () {
 
     document.getElementById("add-player-button").addEventListener("click", function() {
         switch(true){
-            // Username length is less than 1
+            // Username length is less than 1 character
             case username.length < 1: {
                 setInnerText(addPlayerErrorElement, 
                     "Username has to be at least 1 character");
+                setInnerText(playButtonErrorElement, "");
+                break;
+            }
+            // Username is too long (24 characters)
+            case username.length >= 24: {
+                setInnerText(addPlayerErrorElement, "Username is too long");
                 setInnerText(playButtonErrorElement, "");
                 break;
             }
@@ -115,7 +121,8 @@ async function runGameSetup () {
 
             // Create a 'remove player button'
             let removePlayerButton = document.createElement("button");
-            removePlayerButton.innerText = "X"; 
+            removePlayerButton.innerText = "X";
+            removePlayerButton.className = "remove-player-button"
             playerElement.appendChild(removePlayerButton);
             // Listen to 'remove player clicks'
             removePlayerButton.addEventListener("click", function() {
