@@ -26,7 +26,8 @@ function removePlayer (playersList, playerName) {
 
 function resetGame () {
     document.getElementById("game-area").style.display = "none";
-    runWelcome();
+    document.getElementById("game-setup").style.display = "flex";
+    runGameSetup();
 }
 
 // Run the welcome screen
@@ -65,8 +66,8 @@ async function runGameSetup () {
                 // Hide the game set up and show the game area
                 document.getElementById("game-setup").style.display = "none";
                 document.getElementById("game-area").style.display = "block";
-                // Pass all players into the game
-                runGame(playersArray);
+                // Send all players into the game
+                runGame([...playersArray]);
             }else {
                 // Set play button error message
                 setInnerText(playButtonErrorElement, "Please add another player");
@@ -152,22 +153,38 @@ function runGame (playersArray) {
     // Listen to poke button clicks
     pokeButtonElement.addEventListener("click", handlePoke);
 
-    const choosenPlayer = chooseRandomPlayer(playersArray);
-    let playerHintElement = document.getElementById("player-hint");
-    setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
-
     // Reset all values before starting
     let alivePlayers = playersArray;
     let rageMeter = 0; // 0 - 100
+
+    let playerHintElement = document.getElementById("player-hint");
+
+    let choosenPlayer = null;
+    // Choose player randomly and set the player hint
+    if (choosenPlayer === null){
+        choosenPlayer = chooseRandomPlayer(alivePlayers);
+        setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
+    }
+
+    function setRageMeter (value, increment=false) {
+        if (increment){
+            rageMeter += value;
+        }else{
+            rageMeter = value;
+        }
+        // Set the css width accordingly
+        filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
+    }
 
     async function handlePoke () {
         // Disable poke button to prevent unwanted user clicks
         pokeButtonElement.disabled = true; 
 
-        /* Increment rage meter by 0-15 and set the css width 
-        accordingly */
-        rageMeter += Math.random() * 15;
-        filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
+        console.log("playersArray", playersArray)
+        console.log("alivePlayers", alivePlayers)
+
+        /* Increment rage meter by 0-15 */
+        setRageMeter(Math.random() * 15, true);
 
         // Change the bear image at specified levels
         let imageName;
@@ -180,29 +197,30 @@ function runGame (playersArray) {
         }
         bearImage.src = `assets/images/bear/bear_${imageName}.png`;
 
-        // Choose player randomly and set the player hint
-        const choosenPlayer = chooseRandomPlayer(alivePlayers);
-        setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
-
         // Handle game logic
         if (rageMeter >= 100) {
             // Remove player from the game and show hint
             alivePlayers = removePlayer(alivePlayers, choosenPlayer); 
             setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
+            // Pick a new random player
+            choosenPlayer = chooseRandomPlayer(alivePlayers);
             await waitMs(2000); // Wait 2 seconds
 
             // If there's only one player left, declare a winner 
             if (alivePlayers.length === 1){
                 setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
                 await waitMs(5000); // Wait 5 seconds before resetting the game
+                setRageMeter(0);
                 resetGame();
             }else{
                 // If there are players, reset the rage meter 
-                filledRageMeterElement.style.width = "0%";
-                rageMeter = 0;
-                setInnerText(playerHintElement, 
-                    `${chooseRandomPlayer(alivePlayers)} it's your turn!`);
+                setRageMeter(0);
+                choosenPlayer = chooseRandomPlayer(alivePlayers);
+                setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
             }
+        }else {
+            choosenPlayer = chooseRandomPlayer(alivePlayers);
+            setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
         }
 
         pokeButtonElement.disabled = false; // Enable poke button
