@@ -17,19 +17,34 @@ Since the winner is chosen randomly, a larger range of people can take part in t
 ### **Landing page/start menu**
 
 #### Add players to the game
-The start menu enables the users to add their names to the player's list. This personalizes the game experience by sending 'custom-created' users into the game space. To prevent user inputs from destroying the interface, a certain criteria have to be met for the players to grant access to the game space. 
 
-The users are constrained to follow these criteria for the following reasons:
+The start menu enables the users to add their names to the player's list. This personalizes the game experience by sending 'custom-created' users into the game space. 
+
+To prevent user inputs from destroying the interface, a certain criteria have to be met for the players to grant access to the game space. The users are constrained to follow these criteria for the following reasons:
 1. To avoid breaking the underlying game logic.
-2. To avoid breaking the UI with 'lengthy' usernames, or no username at all.
-3. To avoid players choosing identical usernames, which also will break the underlying game logic.
-4. To avoid too many players entering a game.
+2. To avoid breaking the UI with 'lengthy' usernames, or usernames without characters.
+3. To avoid players choosing identical usernames.
+4. To limit the amount of players entering a game.
 
 - Minimum amount of players: **2**
 - Maximum amount of players: **150**
 
 #### Remove players from the game
-A system for removing players has been implemented to enhance the user experience. This solves a lot of 'real world' scenarios where a user might accidentally add a 'wrongly typed' username to the player's list. Another scenario could be a large group that all have added their username and before starting the game, one person has to leave for whatever reason. This would force the group to (a) reset the game and (b) type in each username again. 
 
-With this system, users can simply click on the **red 'X' button** to erase a player from the player list.
+A system for removing players has been implemented to enhance the user experience. This solves 'real world' scenarios where a user might accidentally add a 'wrongly typed' username to the player's list or when an already registered player has to leave before the game starts. Users are able to instead simply click on the **red 'X' button** to remove a player from the player list.
+
+## Future implementations
+
+Here's a breakdown of some ideas and improvements to further develop this project.
+
+### **Settings**
+
+At the landing page/start menu and perhaps accessible inside the game, a 'settings area' should be considered to both solve problems and enhance the user experience. Here's a breakdown of some of the settings that could be implemented. 
+
+##### **Temperament meter** 
+
+- A setting that sets how easily the bear will be provoked.
+
+This could make it easier to speed up a game if it is a large group who is playing.
+
 
