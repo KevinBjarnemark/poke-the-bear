@@ -48,3 +48,26 @@ At the landing page/start menu and perhaps accessible inside the game, a 'settin
 This could make it easier to speed up a game if it is a large group who is playing.
 
 
+## Credits and resources
+
+### Fonts
+
+The fonts below were found at [Google fonts](https://fonts.google.com/).
+
+- [Luckiest Guy](https://fonts.google.com/specimen/Luckiest+Guy)
+- [Niramit](https://fonts.google.com/specimen/Tilt+Neon)
+
+### Images, icons, videos, logo and favicon Information
+
+- All images and icons has been designed, illustrated, and drawn by the creator of this Github repository Kevin Bjarnemark.
+
+
+## Testing 
+
+Here's the tools used to test this project against performance issues, accessibility, best practices, seo, and so forth.
+
+- [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
+- [W3C validator](https://validator.w3.org/)
+- [Jigsaw validator](https://jigsaw.w3.org/css-validator/)
+- [JsHint](https://jshint.com/)
+
