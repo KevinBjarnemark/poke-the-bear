@@ -42,40 +42,68 @@ async function runWelcome () {
 
 // Run the game set up
 async function runGameSetup () {
-    // Get the player list element
+    // Player list HTML element
     let playerListElement = document.getElementById("player-list");
+    // Error HTML elements
     let playButtonErrorElement = document.getElementById("play-button-error");
     let addPlayerErrorElement = document.getElementById("add-player-error");
 
-    // Listen to the username input
+    // Array of the players
+    let playersArray = [];
+    // Current username state from input
     let username = "";
-    document.getElementById("username-input").
-        addEventListener("change", function(e) {
-            username = e.target.value;
+
+    function addPlayerToList () {
+        // Create player element
+        let playerElement = document.createElement("div");
+
+        // Set the player name as the innerText
+        let usernameSpan = document.createElement("span");
+        setInnerText(usernameSpan, username);
+        playerElement.appendChild(usernameSpan);
+
+        // Create a 'remove player button'
+        let removePlayerButton = document.createElement("button");
+        removePlayerButton.innerText = "X";
+        removePlayerButton.className = "remove-player-button"
+        playerElement.appendChild(removePlayerButton);
+        // Listen to the 'remove player click'
+        removePlayerButton.addEventListener("click", function() {
+            /* Remove the playerElement, 
+            note! this will remove the button and stop listening to 
+            button clicks */
+            playerElement.remove(); 
         });
 
-    // Listen to to play button clicks
-    document.getElementById("play-button").
-        addEventListener("click", function() {
-            // Create the players array
-            const playersArray = getChildrenValuesFromSpan(playerListElement, 
-                "textContent");
+        // Push player element to container
+        playerListElement.appendChild(playerElement);
+        username = ""; // Reset username after submission
+        document.getElementById("username-input").value = "";
+        // Reset errors
+        setInnerText(addPlayerErrorElement, "");
+        setInnerText(playButtonErrorElement, "");
+    }
 
-            // Run if at least 2 players have been added
-            if (playersArray.length > 1) {
-                // Hide the game set up and show the game area
-                document.getElementById("game-setup").style.display = "none";
-                document.getElementById("game-area").style.display = "block";
-                // Send all players into the game
-                runGame([...playersArray]);
-            }else {
-                // Set play button error message
-                setInnerText(playButtonErrorElement, "Please add another player");
-                setInnerText(addPlayerErrorElement, ""); // Keep UI minimalistic
-            }
-        });
+    function handlePlayButtonClick () {
+        // Create the players array
+        const playersArray = getChildrenValuesFromSpan(playerListElement, 
+            "textContent");
 
-    document.getElementById("add-player-button").addEventListener("click", function() {
+        // Run if at least 2 players have been added
+        if (playersArray.length > 1) {
+            // Hide the game set up and show the game area
+            document.getElementById("game-setup").style.display = "none";
+            document.getElementById("game-area").style.display = "block";
+            // Send all players into the game
+            runGame([...playersArray]);
+        }else {
+            // Set play button error 
+            setInnerText(playButtonErrorElement, "Please add another player");
+            setInnerText(addPlayerErrorElement, ""); // Keep UI minimalistic
+        }
+    }
+
+    function handleAddPlayerButtonClick () {
         switch(true){
             // Username length is less than 1 character
             case username.length < 1: {
@@ -110,56 +138,39 @@ async function runGameSetup () {
                 break;
             }
         }
+    }
 
-        function addPlayerToList () {
-            // Create player element
-            let playerElement = document.createElement("div");
+    function handleChangeUsername (e) {
+        username = e.target.value;
+    }
 
-            // Set player name as innerText
-            let usernameSpan = document.createElement("span");
-            setInnerText(usernameSpan, username);
-            playerElement.appendChild(usernameSpan);
+    // Event listeners [username, play button, add player]
+    document.getElementById("username-input").
+        addEventListener("change", handleChangeUsername);
 
-            // Create a 'remove player button'
-            let removePlayerButton = document.createElement("button");
-            removePlayerButton.innerText = "X";
-            removePlayerButton.className = "remove-player-button"
-            playerElement.appendChild(removePlayerButton);
-            // Listen to 'remove player clicks'
-            removePlayerButton.addEventListener("click", function() {
-                /* Remove the playerElement, 
-                note! this will remove the button aswell */
-                playerElement.remove(); 
-            });
+    document.getElementById("play-button").
+        addEventListener("click", handlePlayButtonClick);
 
-            // Push player element to container
-            playerListElement.appendChild(playerElement);
-            username = ""; // Reset username
-            document.getElementById("username-input").value = "";
-            // Reset errors
-            setInnerText(addPlayerErrorElement, "");
-            setInnerText(playButtonErrorElement, "");
-        }
-    });
-}
+    document.getElementById("add-player-button").
+        addEventListener("click", handleAddPlayerButtonClick);
+    }
 
 // Run game
 function runGame (playersArray) {
     // Declare 'key' elements
     const pokeButtonElement = document.getElementById("poke-button");
     let filledRageMeterElement = document.getElementById("filled-rage-meter");
+    let playerHintElement = document.getElementById("player-hint");
     let bearImage = document.getElementById("bear").children[0];
+
+    // Declare and reset 'key' varibles
+    let alivePlayers = playersArray;
+    let rageMeter = 0; // 0 - 100
+    let choosenPlayer = null;
 
     // Listen to poke button clicks
     pokeButtonElement.addEventListener("click", handlePoke);
 
-    // Reset all values before starting
-    let alivePlayers = playersArray;
-    let rageMeter = 0; // 0 - 100
-
-    let playerHintElement = document.getElementById("player-hint");
-
-    let choosenPlayer = null;
     // Choose player randomly and set the player hint
     if (choosenPlayer === null){
         choosenPlayer = chooseRandomPlayer(alivePlayers);
@@ -172,16 +183,13 @@ function runGame (playersArray) {
         }else{
             rageMeter = value;
         }
-        // Set the css width accordingly
+        // Set (and limit) the css width accordingly
         filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
     }
 
     async function handlePoke () {
         // Disable poke button to prevent unwanted user clicks
         pokeButtonElement.disabled = true; 
-
-        console.log("playersArray", playersArray)
-        console.log("alivePlayers", alivePlayers)
 
         /* Increment rage meter by 0-15 */
         setRageMeter(Math.random() * 15, true);
