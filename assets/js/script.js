@@ -3,7 +3,24 @@ import { waitMs, setInnerText,
 
 // Run when the DOM has finished loading
 document.addEventListener("DOMContentLoaded", function() {
-    runWelcome();
+
+    const globalHTML = {
+        welcomeScreen: document.getElementById("welcome-screen"),
+        filledRageMeter: document.getElementById("filled-rage-meter"),
+        pokeButton: document.getElementById("poke-button"),
+        playerHint: document.getElementById("player-hint"),
+        bearImage: document.getElementById("bear").children[0],
+        playerList: document.getElementById("player-list"),
+        playButtonError: document.getElementById("play-button-error"),
+        addPlayerError: document.getElementById("add-player-error"),
+        usernameInput: document.getElementById("username-input"),
+        gameSetup: document.getElementById("game-setup"),
+        gameArea: document.getElementById("game-area"),
+        playButton: document.getElementById("play-button"),
+        addPlayerButton: document.getElementById("add-player-button"),
+    };
+
+    runWelcome(globalHTML);
 });
 
 // Local helper functions
@@ -24,34 +41,28 @@ function removePlayer (playersList, playerName) {
     return playersList.filter(player => player !== playerName); 
 }
 
-function resetGame () {
-    document.getElementById("game-area").style.display = "none";
-    document.getElementById("game-setup").style.display = "flex";
-    runGameSetup();
+function resetGame (globalHTML) {
+    globalHTML.gameArea.style.display = "none";
+    globalHTML.gameSetup.style.display = "flex";
+    runGameSetup(globalHTML);
 }
 
 // Run the welcome screen
-async function runWelcome () {
+async function runWelcome (globalHTML) {
     await waitMs(1000);
     // Hide the welcome screen and show game setup
-    document.getElementById("welcome-screen").style.display = "none";
-    document.getElementById("game-setup").style.display = "flex";
+    globalHTML.welcomeScreen.style.display = "none";
+    globalHTML.gameSetup.style.display = "flex";
     // Run the game setup
-    runGameSetup();
+    runGameSetup(globalHTML);
 }
 
 // Run the game set up
-async function runGameSetup () {
-    // Player list HTML element
-    let playerListElement = document.getElementById("player-list");
-    // Error HTML elements
-    let playButtonErrorElement = document.getElementById("play-button-error");
-    let addPlayerErrorElement = document.getElementById("add-player-error");
-
+async function runGameSetup (globalHTML) {
     // Current username state from input
     let username = "";
 
-    function addPlayerToList () {
+    function addPlayerToList (globalHTML) {
         // Create player element
         let playerElement = document.createElement("div");
 
@@ -74,65 +85,65 @@ async function runGameSetup () {
         });
 
         // Push player element to container
-        playerListElement.appendChild(playerElement);
+        globalHTML.playerList.appendChild(playerElement);
         username = ""; // Reset username after submission
-        document.getElementById("username-input").value = "";
+        globalHTML.usernameInput.value = "";
         // Reset errors
-        setInnerText(addPlayerErrorElement, "");
-        setInnerText(playButtonErrorElement, "");
+        setInnerText(globalHTML.addPlayerError, "");
+        setInnerText(globalHTML.playButtonError, "");
     }
 
-    function handlePlayButtonClick () {
+    function handlePlayButtonClick (globalHTML) {
         // Create the players array
-        const playersArray = getChildrenValuesFromSpan(playerListElement, 
+        const playersArray = getChildrenValuesFromSpan(globalHTML.playerList, 
             "textContent");
 
         // Run if at least 2 players have been added
         if (playersArray.length > 1) {
             // Hide the game set up and show the game area
-            document.getElementById("game-setup").style.display = "none";
-            document.getElementById("game-area").style.display = "block";
+            globalHTML.gameSetup.style.display = "none";
+            globalHTML.gameArea.style.display = "block";
             // Send all players into the game
-            runGame([...playersArray]);
+            runGame([...playersArray], globalHTML);
         }else {
             // Set play button error 
-            setInnerText(playButtonErrorElement, "Please add another player");
-            setInnerText(addPlayerErrorElement, ""); // Keep UI minimalistic
+            setInnerText(globalHTML.playButtonError, "Please add another player");
+            setInnerText(globalHTML.addPlayerError, ""); // Keep UI minimalistic
         }
     }
 
-    function handleAddPlayerButtonClick () {
+    function handleAddPlayerButtonClick (globalHTML) {
         switch(true){
             // Username length is less than 1 character
             case username.length < 1: {
-                setInnerText(addPlayerErrorElement, 
+                setInnerText(globalHTML.addPlayerError, 
                     "Username has to be at least 1 character");
-                setInnerText(playButtonErrorElement, "");
+                setInnerText(globalHTML.playButtonError, "");
                 break;
             }
             // Username is too long (24 characters)
             case username.length >= 24: {
-                setInnerText(addPlayerErrorElement, "Username is too long");
-                setInnerText(playButtonErrorElement, "");
+                setInnerText(globalHTML.addPlayerError, "Username is too long");
+                setInnerText(globalHTML.playButtonError, "");
                 break;
             }
             // There are more than 10 players
-            case playerListElement.children.length > 150: {
-                setInnerText(addPlayerErrorElement, 
+            case globalHTML.playerList.children.length > 150: {
+                setInnerText(globalHTML.addPlayerError, 
                     "The limit for this game is 150 players");
-                setInnerText(playButtonErrorElement, "");
+                setInnerText(globalHTML.playButtonError, "");
                 break;
             }
             // Username already exists
-            case getChildrenValuesFromSpan(playerListElement, "innerText").includes(
+            case getChildrenValuesFromSpan(globalHTML.playerList, "innerText").includes(
                 username): {
-                setInnerText(addPlayerErrorElement, "Username already exists");
-                setInnerText(playButtonErrorElement, "");
+                setInnerText(globalHTML.addPlayerError, "Username already exists");
+                setInnerText(globalHTML.playButtonError, "");
                 break;
             }
             // Run if validation passes
             default: {
-                addPlayerToList();
+                addPlayerToList(globalHTML);
                 break;
             }
         }
@@ -143,36 +154,31 @@ async function runGameSetup () {
     }
 
     // Event listeners [username, play button, add player]
-    document.getElementById("username-input").
-        addEventListener("change", handleChangeUsername);
+    globalHTML.usernameInput.addEventListener("change", () => {
+        handleChangeUsername(globalHTML)});
 
-    document.getElementById("play-button").
-        addEventListener("click", handlePlayButtonClick);
+    globalHTML.playButton.addEventListener("click", () => {
+        handlePlayButtonClick(globalHTML)});
 
-    document.getElementById("add-player-button").
-        addEventListener("click", handleAddPlayerButtonClick);
-    }
+    globalHTML.addPlayerButton.addEventListener("click", () => {
+        handleAddPlayerButtonClick(globalHTML)});
+}
 
 // Run game
-function runGame (playersArray) {
-    // Declare 'key' elements
-    const pokeButtonElement = document.getElementById("poke-button");
-    let filledRageMeterElement = document.getElementById("filled-rage-meter");
-    let playerHintElement = document.getElementById("player-hint");
-    let bearImage = document.getElementById("bear").children[0];
-
+function runGame (playersArray, globalHTML) {
     // Declare and reset 'key' varibles
     let alivePlayers = playersArray;
     let rageMeter = 0; // 0 - 100
     let choosenPlayer = null;
 
     // Listen to poke button clicks
-    pokeButtonElement.addEventListener("click", handlePoke);
+    globalHTML.pokeButton.addEventListener("click", handlePoke);
+
 
     // Choose player randomly and set the player hint
     if (choosenPlayer === null){
         choosenPlayer = chooseRandomPlayer(alivePlayers);
-        setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
+        setInnerText(globalHTML.playerHint, `${choosenPlayer} it's your turn!`);
     }
 
     function setRageMeter (value, increment=false) {
@@ -181,13 +187,13 @@ function runGame (playersArray) {
         }else{
             rageMeter = value;
         }
-        // Set (and limit) the css width accordingly
-        filledRageMeterElement.style.width = `${Math.min(rageMeter, 100)}%`;
+        // Set (and limit) the css width accordalHTML.bearImageingly
+        globalHTML.filledRageMeter.style.width = `${Math.min(rageMeter, 100)}%`;
     }
 
-    async function handlePoke () {
+    async function handlePoke (globalHTML) {
         // Disable poke button to prevent unwanted user clicks
-        pokeButtonElement.disabled = true; 
+        globalHTML.pokeButton.disabled = true; 
 
         /* Increment rage meter by 0-15 */
         setRageMeter(Math.random() * 15, true);
@@ -201,34 +207,34 @@ function runGame (playersArray) {
         }else {
             imageName = 100;
         }
-        bearImage.src = `assets/images/bear/bear_${imageName}.png`;
+        globalHTML.bearImage.src = `assets/images/bear/bear_${imageName}.png`;
 
         // Handle game logic
         if (rageMeter >= 100) {
             // Remove player from the game and show hint
             alivePlayers = removePlayer(alivePlayers, choosenPlayer); 
-            setInnerText(playerHintElement, `Sorry ${choosenPlayer}, you're out!`);
+            setInnerText(globalHTML.playerHint, `Sorry ${choosenPlayer}, you're out!`);
             // Pick a new random player
             choosenPlayer = chooseRandomPlayer(alivePlayers);
             await waitMs(2000); // Wait 2 seconds
 
             // If there's only one player left, declare a winner 
             if (alivePlayers.length === 1){
-                setInnerText(playerHintElement, `${alivePlayers[0]}, you won!`);
+                setInnerText(globalHTML.playerHint, `${alivePlayers[0]}, you won!`);
                 await waitMs(5000); // Wait 5 seconds before resetting the game
                 setRageMeter(0);
-                resetGame();
+                resetGame(globalHTML);
             }else{
                 // If there are players, reset the rage meter 
                 setRageMeter(0);
                 choosenPlayer = chooseRandomPlayer(alivePlayers);
-                setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
+                setInnerText(globalHTML.playerHint, `${choosenPlayer} it's your turn!`);
             }
         }else {
             choosenPlayer = chooseRandomPlayer(alivePlayers);
-            setInnerText(playerHintElement, `${choosenPlayer} it's your turn!`);
+            setInnerText(globalHTML.playerHint, `${choosenPlayer} it's your turn!`);
         }
 
-        pokeButtonElement.disabled = false; // Enable poke button
+        globalHTML.pokeButton.disabled = false; // Enable poke button
     }
 }
