@@ -48,8 +48,6 @@ async function runGameSetup () {
     let playButtonErrorElement = document.getElementById("play-button-error");
     let addPlayerErrorElement = document.getElementById("add-player-error");
 
-    // Array of the players
-    let playersArray = [];
     // Current username state from input
     let username = "";
 

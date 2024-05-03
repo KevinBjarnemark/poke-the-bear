@@ -43,5 +43,7 @@ export const waitMs = async (ms) => {
  * @param {string} text The text that should be inserted into the HTML object
  */
 export function setInnerText (element, text) {
-    element["innerText"] = text;
+    if (element){
+        element["innerText"] = text;
+    }
 }
