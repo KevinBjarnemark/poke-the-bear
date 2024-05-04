@@ -27,40 +27,46 @@
     background: #76797b;
 }
 
+/* Variables */
+:root {
+    --error: #fe6060;
+    --red: #e35050;
+    --light-red: #e46c6c;
+    --light-blue-tint: #dee4eb;
+    --dark-blue-tint: #3E4349;
+    --dark-gray: #4c5054;
+    --gray: #565c64;
+    --green: #92d283;
+}
+
 /* Main */
 main {
     /* Cover the entire screen */
     display: flex;
     height: 100vh;
     width: 100vw;
-    background-color: #3E4349;
+    background-color: var(--dark-blue-tint);
 }
 
 /* General styles */
 input {
-    background-color: #dee4eb;
+    background-color: var(--light-blue-tint);
     border: transparent;
     padding: 5px 0;
     min-width: 260px;
 }
 
-button {
-    cursor: pointer;
-}
-
 .button {
     padding: 5px 20px;
-    border: 1px solid #ffffff31;
+    border: none;
     background-color: #ffffff1f;
     color: #ffffff;
     border-radius: 1.5px;
-}
-.button:hover {
-    background-color: #ffffff30;
+    cursor: pointer;
 }
 
 .error-message {
-    color: #ff5d5d;
+    color: var(--error);
     padding: 8px 0;
     font-size: 13px;
     text-align: center;
@@ -92,7 +98,7 @@ button {
     left: 0;   
     width: inherit;
     height: 5px;
-    background-color: #4c5054;
+    background-color: var(--dark-gray);
     filter: blur(3px);
 }
 
@@ -151,7 +157,7 @@ button {
 
 /* The player element */
 #player-list > div {
-    background-color: #565c64;
+    background-color: var(--gray);
     border-radius: 4px;
     padding: 5px 10px;
     margin: 5px 0;
@@ -160,9 +166,9 @@ button {
 .remove-player-button {
     position: absolute;
     right: 10%;
-    background-color: #e35050;
+    background-color: var(--red);
     color: #ffffff;
-    border: 1.5px solid #e46c6c;
+    border: 1.5px solid var(--light-red);
     border-radius: 3px;
     width: 20px;
     height: 20px;
@@ -174,7 +180,7 @@ button {
 
 #play-button {
     margin-top: 8px;
-    background-color: #92d283;
+    background-color: var(--green);
     text-transform: uppercase;
     font-weight: 400;
     font-size: 120%;
@@ -307,5 +313,5 @@ button {
     font-family: "Luckiest Guy", sans-serif;
     font-size: 120%;
     font-weight: 100;
-    color: #d5dfe4;
+    color: var(--light-blue-tint);
 }
