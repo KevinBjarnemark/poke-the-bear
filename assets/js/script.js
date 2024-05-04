@@ -212,7 +212,7 @@ async function handlePoke (globalHTML, globalVariables) {
         // If there's only one player left, declare a winner 
         if (globalVariables.alivePlayers.length === 1){
             globalHTML.playerHint.innerHTML = 
-                `<div>${globalVariables.chosenPlayer}</div><div style="color: var(--green); font-family: 'Luckiest Guy', sans-serif;">YOU WON!</div>`;
+                `<div>${globalVariables.alivePlayers[0]}</div><div style="color: var(--green); font-family: 'Luckiest Guy', sans-serif;">YOU WON!</div>`;
             await waitMs(5000); // Wait 5 seconds before resetting the game
             resetGame(globalHTML, globalVariables);
         }else{
