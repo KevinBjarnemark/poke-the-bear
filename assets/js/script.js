@@ -56,25 +56,8 @@ async function runGameSetup (globalHTML, globalVariables) {
     }
 }
 
-// Local helper functions
-function chooseRandomPlayer (playersArray) {
-    const chosenPlayerIndex = Math.floor(Math.random() * playersArray.length);
-    return playersArray[chosenPlayerIndex];
-}
-
-/**
- * This function will filter out a player from an array of 
- * players 
- * 
- * @param {Array} playersList Declared as a let variable
- * @param {string} playerName
- * @returns {Array} 
- */
-function removePlayer (playersList, playerName) {
-    return playersList.filter(player => player !== playerName); 
-}
-
 function resetGame (globalHTML, globalVariables) {
+    setRageMeter(globalHTML, globalVariables, 0);
     globalHTML.gameArea.style.display = "none";
     globalHTML.gameSetup.style.display = "flex";
     runGameSetup(globalHTML, globalVariables);
@@ -175,10 +158,39 @@ function setRageMeter (globalHTML, globalVariables, value, increment=false) {
     globalHTML.filledRageMeter.style.width = `${Math.min(globalVariables.rageMeter, 100)}%`;
 }
 
+/**
+ * This will filter out a player from the alivePlayersArray
+ * and set the innerText of the playerHint
+ * 
+ * @param {Object} globalHTML
+ * @param {Object} globalVariables 
+ */
+function kickChosenPlayer (globalHTML, globalVariables) {
+    globalVariables.alivePlayers = globalVariables.alivePlayers.filter(
+        player => player !== globalVariables.chosenPlayer);
+    setInnerText(globalHTML.playerHint, 
+        `Sorry ${globalVariables.chosenPlayer}, you're out!`);
+}
+
+/**
+ * This will generate a random number(index) based on the alive players 
+ * and choose a random player based out of the generated value.
+ * The HTML element 'playersHint' will update accordingly
+ * 
+ * @param {Object} globalHTML
+ * @param {Object} globalVariables 
+ */
+function pickNewPlayer (globalHTML, globalVariables) {
+    const chosenPlayerIndex = Math.floor(Math.random() * 
+        globalVariables.alivePlayers.length);
+
+    globalVariables.chosenPlayer = globalVariables.alivePlayers[chosenPlayerIndex];
+    setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
+}
+
 async function handlePoke (globalHTML, globalVariables) {
     // Disable poke button to prevent unwanted user clicks
     globalHTML.pokeButton.disabled = true; 
-
     /* Increment rage meter by 0-15 */
     setRageMeter(globalHTML, globalVariables, Math.random() * 15, true);
 
@@ -195,28 +207,20 @@ async function handlePoke (globalHTML, globalVariables) {
 
     // Handle game logic
     if (globalVariables.rageMeter >= 100) {
-        // Remove player from the game and show hint
-        globalVariables.alivePlayers = removePlayer(globalVariables.alivePlayers, globalVariables.chosenPlayer); 
-        setInnerText(globalHTML.playerHint, `Sorry ${globalVariables.chosenPlayer}, you're out!`);
-        // Pick a new random player
-        globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
+        kickChosenPlayer(globalHTML, globalVariables);
         await waitMs(2000); // Wait 2 seconds
-
         // If there's only one player left, declare a winner 
         if (globalVariables.alivePlayers.length === 1){
             setInnerText(globalHTML.playerHint, `${globalVariables.alivePlayers[0]}, you won!`);
             await waitMs(5000); // Wait 5 seconds before resetting the game
-            setRageMeter(globalHTML, globalVariables, 0);
             resetGame(globalHTML);
         }else{
             // If there are players, reset the rage meter 
             setRageMeter(globalHTML, globalVariables, 0);
-            globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
-            setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
+            pickNewPlayer(globalHTML, globalVariables);
         }
     }else {
-        globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
-        setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
+        pickNewPlayer(globalHTML, globalVariables);
     }
 
     globalHTML.pokeButton.disabled = false; // Enable poke button
@@ -230,7 +234,5 @@ function runGame (playersArray, globalHTML, globalVariables) {
     globalVariables.alivePlayers = [...playersArray];
     globalVariables.rageMeter = 0; // 0 - 100
 
-    // Choose player randomly and set the player hint
-    globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
-    setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
+    pickNewPlayer(globalHTML, globalVariables);
 }
