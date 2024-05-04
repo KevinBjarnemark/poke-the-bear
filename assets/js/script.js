@@ -27,6 +27,18 @@ document.addEventListener("DOMContentLoaded", function() {
         usernameInput: "",
     };
 
+    // Listen to poke button clicks
+    globalHTML.pokeButton.addEventListener("click", () => {handlePoke(globalHTML, globalVariables)});
+        // Event listeners [username, play button, add player]
+        globalHTML.usernameInput.addEventListener("change", (e) => {
+            handleChangeUsername(globalVariables, e)});
+    
+        globalHTML.playButton.addEventListener("click", () => {
+            handlePlayButtonClick(globalHTML, globalVariables)});
+    
+        globalHTML.addPlayerButton.addEventListener("click", () => {
+            handleAddPlayerButtonClick(globalHTML, globalVariables)});
+
     runWelcome(globalHTML, globalVariables);
 });
 
@@ -158,16 +170,8 @@ function handleChangeUsername (globalVariables, e) {
 }
 
 // Run the game set up
-async function runGameSetup (globalHTML, globalVariables) {
-    // Event listeners [username, play button, add player]
-    globalHTML.usernameInput.addEventListener("change", (e) => {
-        handleChangeUsername(globalVariables, e)});
-
-    globalHTML.playButton.addEventListener("click", () => {
-        handlePlayButtonClick(globalHTML, globalVariables)});
-
-    globalHTML.addPlayerButton.addEventListener("click", () => {
-        handleAddPlayerButtonClick(globalHTML, globalVariables)});
+async function runGameSetup () {
+    // TODO
 }
 
 function setRageMeter (globalHTML, globalVariables, value, increment=false) {
@@ -180,6 +184,54 @@ function setRageMeter (globalHTML, globalVariables, value, increment=false) {
     globalHTML.filledRageMeter.style.width = `${Math.min(globalVariables.rageMeter, 100)}%`;
 }
 
+
+async function handlePoke (globalHTML, globalVariables) {
+    // Disable poke button to prevent unwanted user clicks
+    globalHTML.pokeButton.disabled = true; 
+
+    /* Increment rage meter by 0-15 */
+    setRageMeter(globalHTML, globalVariables, Math.random() * 15, true);
+
+    // Change the bear image at specified levels
+    let imageName;
+    if (globalVariables.rageMeter < 50) {
+        imageName = 0;
+    }else if (globalVariables.rageMeter < 100) {
+        imageName = 50;
+    }else {
+        imageName = 100;
+    }
+    globalHTML.bearImage.src = `assets/images/bear/bear_${imageName}.png`;
+
+    // Handle game logic
+    if (globalVariables.rageMeter >= 100) {
+        // Remove player from the game and show hint
+        globalVariables.alivePlayers = removePlayer(globalVariables.alivePlayers, globalVariables.chosenPlayer); 
+        setInnerText(globalHTML.playerHint, `Sorry ${globalVariables.chosenPlayer}, you're out!`);
+        // Pick a new random player
+        globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
+        await waitMs(2000); // Wait 2 seconds
+
+        // If there's only one player left, declare a winner 
+        if (globalVariables.alivePlayers.length === 1){
+            setInnerText(globalHTML.playerHint, `${globalVariables.alivePlayers[0]}, you won!`);
+            await waitMs(5000); // Wait 5 seconds before resetting the game
+            setRageMeter(globalHTML, globalVariables, 0);
+            resetGame(globalHTML);
+        }else{
+            // If there are players, reset the rage meter 
+            setRageMeter(globalHTML, globalVariables, 0);
+            globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
+            setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
+        }
+    }else {
+        globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
+        setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
+    }
+
+    globalHTML.pokeButton.disabled = false; // Enable poke button
+}
+
 // Run game
 function runGame (playersArray, globalHTML, globalVariables) {
     // Reset 'key' varibles
@@ -187,59 +239,9 @@ function runGame (playersArray, globalHTML, globalVariables) {
     globalVariables.rageMeter = 0; // 0 - 100
     globalVariables.chosenPlayer = null;
 
-    // Listen to poke button clicks
-    globalHTML.pokeButton.addEventListener("click", () => {handlePoke(globalHTML)});
-
     // Choose player randomly and set the player hint
     if (globalVariables.chosenPlayer === null){
         globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
         setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
-    }
-
-    async function handlePoke (globalHTML) {
-        // Disable poke button to prevent unwanted user clicks
-        globalHTML.pokeButton.disabled = true; 
-
-        /* Increment rage meter by 0-15 */
-        setRageMeter(globalHTML, globalVariables, Math.random() * 15, true);
-
-        // Change the bear image at specified levels
-        let imageName;
-        if (globalVariables.rageMeter < 50) {
-            imageName = 0;
-        }else if (globalVariables.rageMeter < 100) {
-            imageName = 50;
-        }else {
-            imageName = 100;
-        }
-        globalHTML.bearImage.src = `assets/images/bear/bear_${imageName}.png`;
-
-        // Handle game logic
-        if (globalVariables.rageMeter >= 100) {
-            // Remove player from the game and show hint
-            globalVariables.alivePlayers = removePlayer(globalVariables.alivePlayers, globalVariables.chosenPlayer); 
-            setInnerText(globalHTML.playerHint, `Sorry ${globalVariables.chosenPlayer}, you're out!`);
-            // Pick a new random player
-            globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
-            await waitMs(2000); // Wait 2 seconds
-
-            // If there's only one player left, declare a winner 
-            if (globalVariables.alivePlayers.length === 1){
-                setInnerText(globalHTML.playerHint, `${globalVariables.alivePlayers[0]}, you won!`);
-                await waitMs(5000); // Wait 5 seconds before resetting the game
-                setRageMeter(globalHTML, globalVariables, 0);
-                resetGame(globalHTML);
-            }else{
-                // If there are players, reset the rage meter 
-                setRageMeter(globalHTML, globalVariables, 0);
-                globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
-                setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
-            }
-        }else {
-            globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
-            setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
-        }
-
-        globalHTML.pokeButton.disabled = false; // Enable poke button
     }
 }
