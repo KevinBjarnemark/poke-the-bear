@@ -194,9 +194,30 @@ button {
     position: absolute;
     top: 10vh;
     right: 17vw;
+    color: #bdc7cd;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 95%;
+}
+
+#player-hint :first-child {
+    animation-name: shaking-animation;
+    animation-duration: 2.5s; 
+    animation-iteration-count: infinite; 
+    animation-timing-function: linear;
+    font-family: "Luckiest Guy", sans-serif;
+    font-size: 180%;
+    font-weight: 100;
+    color: #d5dfe4;
+    text-decoration: underline 2px #7c7f80;
+}
+
+@keyframes shaking-animation {
+    0% {transform: rotate(0deg)}
+    25% {transform: rotate(3.5deg)}
+    75% {transform: rotate(-3.5deg)}
+    100% {transform: rotate(0deg)}
 }
 
 /* Rage meter */
