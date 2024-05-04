@@ -3,6 +3,7 @@ import { waitMs, setInnerText,
 
 // Run when the DOM has finished loading
 document.addEventListener("DOMContentLoaded", function() {
+    // README! #1
 
     const globalHTML = {
         welcomeScreen: document.getElementById("welcome-screen"),
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let globalVariables = {
         firstLoad: true,
         alivePlayers: [],
-        chosenPlayer: null,
+        chosenPlayer: null, // String or null
         rageMeter: 0, // 0 - 100
         usernameInput: "",
     };
@@ -46,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Run the game set up
 async function runGameSetup (globalHTML, globalVariables) {
-    // Show welcome screen on the first load
     if (globalVariables?.firstLoad){
+        // Temporarily show welcome screen on the first load
         await waitMs(1000);
         // Hide the welcome screen and show game setup
         globalHTML.welcomeScreen.style.display = "none";
@@ -56,7 +57,7 @@ async function runGameSetup (globalHTML, globalVariables) {
 }
 
 // Local helper functions
-function choseRandomPlayer (playersArray) {
+function chooseRandomPlayer (playersArray) {
     const chosenPlayerIndex = Math.floor(Math.random() * playersArray.length);
     return playersArray[chosenPlayerIndex];
 }
@@ -198,7 +199,7 @@ async function handlePoke (globalHTML, globalVariables) {
         globalVariables.alivePlayers = removePlayer(globalVariables.alivePlayers, globalVariables.chosenPlayer); 
         setInnerText(globalHTML.playerHint, `Sorry ${globalVariables.chosenPlayer}, you're out!`);
         // Pick a new random player
-        globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
+        globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
         await waitMs(2000); // Wait 2 seconds
 
         // If there's only one player left, declare a winner 
@@ -210,18 +211,17 @@ async function handlePoke (globalHTML, globalVariables) {
         }else{
             // If there are players, reset the rage meter 
             setRageMeter(globalHTML, globalVariables, 0);
-            globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
+            globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
             setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
         }
     }else {
-        globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
+        globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
         setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
     }
 
     globalHTML.pokeButton.disabled = false; // Enable poke button
 }
 
-// Run game
 function runGame (playersArray, globalHTML, globalVariables) {
     // Hide the game set up and show the game area
     globalHTML.gameSetup.style.display = "none";
@@ -229,11 +229,8 @@ function runGame (playersArray, globalHTML, globalVariables) {
     // Reset varibles
     globalVariables.alivePlayers = [...playersArray];
     globalVariables.rageMeter = 0; // 0 - 100
-    globalVariables.chosenPlayer = null;
 
     // Choose player randomly and set the player hint
-    if (globalVariables.chosenPlayer === null){
-        globalVariables.chosenPlayer = choseRandomPlayer(globalVariables.alivePlayers);
-        setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
-    }
+    globalVariables.chosenPlayer = chooseRandomPlayer(globalVariables.alivePlayers);
+    setInnerText(globalHTML.playerHint, `${globalVariables.chosenPlayer} it's your turn!`);
 }

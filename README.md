@@ -71,3 +71,12 @@ Here's the tools used to test this project against performance issues, accessibi
 - [Jigsaw validator](https://jigsaw.w3.org/css-validator/)
 - [JsHint](https://jshint.com/)
 
+## Code 
+
+In this section some code I will go over some concepts reflected in the actual codebase of this project. 
+
+### # 1
+
+#### Global scope
+
+The global Scope consists of key variables and elements that most of the functions need to access. For a small project like this, it's a great way to manage states in a 'global' way. As the project grows one may want to migrate to a library like React in order to manage states more efficiently. In that way, single entries in an object can hold references to defined variables. This would enable the developer to insert single entries or 'props' as a parameters to functions. If the intent is to continue this project in vanilla javascript, one can instead split objects that need to be referenced globally into smaller groups. This would prevent small functions from dealing with unnecessary data.
