@@ -21,25 +21,27 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     let globalVariables = {
+        firstLoad: true,
         alivePlayers: [],
         chosenPlayer: null,
         rageMeter: 0, // 0 - 100
         usernameInput: "",
     };
 
-    // Listen to poke button clicks
-    globalHTML.pokeButton.addEventListener("click", () => {handlePoke(globalHTML, globalVariables)});
-        // Event listeners [username, play button, add player]
-        globalHTML.usernameInput.addEventListener("change", (e) => {
-            handleChangeUsername(globalVariables, e)});
-    
-        globalHTML.playButton.addEventListener("click", () => {
-            handlePlayButtonClick(globalHTML, globalVariables)});
-    
-        globalHTML.addPlayerButton.addEventListener("click", () => {
-            handleAddPlayerButtonClick(globalHTML, globalVariables)});
+    // Event listeners [username, play button, add player]
+    globalHTML.usernameInput.addEventListener("change", (e) => {
+        handleChangeUsername(globalVariables, e)});
 
-    runWelcome(globalHTML, globalVariables);
+    globalHTML.addPlayerButton.addEventListener("click", () => {
+        handleAddPlayerButtonClick(globalHTML, globalVariables)});
+
+    globalHTML.playButton.addEventListener("click", () => {
+        handlePlayButtonClick(globalHTML, globalVariables)});
+
+    globalHTML.pokeButton.addEventListener("click", () => {
+        handlePoke(globalHTML, globalVariables)});
+
+    runGameSetup(globalHTML, globalVariables);
 });
 
 // Local helper functions
@@ -60,19 +62,20 @@ function removePlayer (playersList, playerName) {
     return playersList.filter(player => player !== playerName); 
 }
 
+// Run the game set up
+async function runGameSetup (globalHTML, globalVariables) {
+    // Show welcome screen on the first load
+    if (globalVariables.firstLoad){
+        await waitMs(1000);
+        // Hide the welcome screen and show game setup
+        globalHTML.welcomeScreen.style.display = "none";
+        globalHTML.gameSetup.style.display = "flex";
+    }
+}
+
 function resetGame (globalHTML, globalVariables) {
     globalHTML.gameArea.style.display = "none";
     globalHTML.gameSetup.style.display = "flex";
-    runGameSetup(globalHTML, globalVariables);
-}
-
-// Run the welcome screen
-async function runWelcome (globalHTML, globalVariables) {
-    await waitMs(1000);
-    // Hide the welcome screen and show game setup
-    globalHTML.welcomeScreen.style.display = "none";
-    globalHTML.gameSetup.style.display = "flex";
-    // Run the game setup
     runGameSetup(globalHTML, globalVariables);
 }
 
@@ -169,11 +172,6 @@ function handleChangeUsername (globalVariables, e) {
     globalVariables.usernameInput = e.target.value;
 }
 
-// Run the game set up
-async function runGameSetup () {
-    // TODO
-}
-
 function setRageMeter (globalHTML, globalVariables, value, increment=false) {
     if (increment){
         globalVariables.rageMeter += value;
@@ -183,7 +181,6 @@ function setRageMeter (globalHTML, globalVariables, value, increment=false) {
     // Set (and limit) the css width accordalHTML.bearImageingly
     globalHTML.filledRageMeter.style.width = `${Math.min(globalVariables.rageMeter, 100)}%`;
 }
-
 
 async function handlePoke (globalHTML, globalVariables) {
     // Disable poke button to prevent unwanted user clicks
