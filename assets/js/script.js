@@ -169,7 +169,7 @@ function kickChosenPlayer (globalHTML, globalVariables) {
     globalVariables.alivePlayers = globalVariables.alivePlayers.filter(
         player => player !== globalVariables.chosenPlayer);
     globalHTML.playerHint.innerHTML = 
-        `<div>${globalVariables.chosenPlayer}</div><div style="color: var(--red);">SORRY, YOU'RE OUT</div>`;
+        `<div>${globalVariables.chosenPlayer}</div><div style="color: var(--red); font-family: 'Luckiest Guy', sans-serif;">YOU'RE OUT</div>`;
 }
 
 /**
@@ -190,7 +190,15 @@ function pickNewPlayer (globalHTML, globalVariables) {
 
 async function handlePoke (globalHTML, globalVariables) {
     // Disable poke button to prevent unwanted user clicks
-    globalHTML.pokeButton.disabled = true; 
+    globalHTML.pokeButton.disabled = true;
+    // Poke button transition effect 
+    globalHTML.pokeButton.style.transform = "scale(0.9)";
+    await waitMs(50)
+    globalHTML.pokeButton.style.transform = "scale(1)";
+    // Player hint transition effect
+    globalHTML.playerHint.style.transform = "scale(0.7)";
+    await waitMs(150)
+    globalHTML.playerHint.style.transform = "scale(1)";
     /* Increment rage meter by 0-15 */
     setRageMeter(globalHTML, globalVariables, Math.random() * 15, true);
 
