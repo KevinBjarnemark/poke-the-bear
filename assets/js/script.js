@@ -58,6 +58,8 @@ async function runGameSetup (globalHTML, globalVariables) {
 }
 
 function resetGame (globalHTML, globalVariables) {
+    globalHTML.bearImage.src = `assets/images/bear/bear_0.png`;
+    globalHTML.bearImage.alt = "A bear lying down";
     setRageMeter(globalHTML, globalVariables, 0);
     // Hide the game area and show game setup
     globalHTML.gameArea.style.display = "none";
@@ -202,16 +204,20 @@ async function handlePoke (globalHTML, globalVariables) {
     /* Increment rage meter by 0-15 */
     setRageMeter(globalHTML, globalVariables, Math.random() * 15, true);
 
-    // Change the bear image at specified levels
-    let imageName;
-    if (globalVariables.rageMeter < 50) {
-        imageName = 0;
-    }else if (globalVariables.rageMeter < 100) {
-        imageName = 50;
+    // Change the bear image at specified levels + SEO & accessibility optimization
+    let updatedBearStyle = {};
+    if (globalVariables.rageMeter < 33) {
+        updatedBearStyle.imageName = 0;
+        updatedBearStyle.alt = "A bear lying down";
+    }else if (globalVariables.rageMeter < 66) {
+        updatedBearStyle.imageName = 33;
+        updatedBearStyle.alt = "A bear sitting on the ground";
     }else {
-        imageName = 100;
+        updatedBearStyle.imageName = 66;
+        updatedBearStyle.alt = "An angry bear standing up";
     }
-    globalHTML.bearImage.src = `assets/images/bear/bear_${imageName}.png`;
+    globalHTML.bearImage.src = `assets/images/bear/bear_${updatedBearStyle.imageName}.png`;
+    globalHTML.bearImage.alt = updatedBearStyle.alt;
 
     // Handle game logic
     if (globalVariables.rageMeter >= 100) {
