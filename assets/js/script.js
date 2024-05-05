@@ -141,6 +141,9 @@ function handlePlayButtonClick (globalHTML, globalVariables) {
 
     // Run if at least 2 players have been added
     if (playersArray.length > 1) {
+        // Reset errors
+        setInnerText(globalHTML.addPlayerError, "");
+        setInnerText(globalHTML.playButtonError, "");
         // Send all players into the game
         runGame(playersArray, globalHTML, globalVariables);
     }else {
