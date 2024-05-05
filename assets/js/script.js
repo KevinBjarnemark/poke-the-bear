@@ -204,6 +204,25 @@ async function handlePoke (globalHTML, globalVariables) {
     /* Increment rage meter by 0-15 */
     setRageMeter(globalHTML, globalVariables, Math.random() * 15, true);
 
+    // Handle game logic
+    if (globalVariables.rageMeter >= 100) {
+        kickChosenPlayer(globalHTML, globalVariables);
+        await waitMs(2000); // Wait 2 seconds
+        // If there's only one player left, declare a winner 
+        if (globalVariables.alivePlayers.length === 1){
+            globalHTML.playerHint.innerHTML = 
+                `<div>${globalVariables.alivePlayers[0]}</div><div style="color: var(--green); font-family: 'Luckiest Guy', sans-serif;">YOU WON!</div>`;
+                await waitMs(5000); // Wait 5 seconds before resetting the game
+            resetGame(globalHTML, globalVariables);
+        }else{
+            // If there are players, reset the rage meter 
+            setRageMeter(globalHTML, globalVariables, 0);
+            pickNewPlayer(globalHTML, globalVariables);
+        }
+    }else {
+        pickNewPlayer(globalHTML, globalVariables);
+    }
+
     // Change the bear image at specified levels + SEO & accessibility optimization
     let updatedBearStyle = {};
     if (globalVariables.rageMeter < 33) {
@@ -218,25 +237,6 @@ async function handlePoke (globalHTML, globalVariables) {
     }
     globalHTML.bearImage.src = `assets/images/bear/bear_${updatedBearStyle.imageName}.png`;
     globalHTML.bearImage.alt = updatedBearStyle.alt;
-
-    // Handle game logic
-    if (globalVariables.rageMeter >= 100) {
-        kickChosenPlayer(globalHTML, globalVariables);
-        await waitMs(2000); // Wait 2 seconds
-        // If there's only one player left, declare a winner 
-        if (globalVariables.alivePlayers.length === 1){
-            globalHTML.playerHint.innerHTML = 
-                `<div>${globalVariables.alivePlayers[0]}</div><div style="color: var(--green); font-family: 'Luckiest Guy', sans-serif;">YOU WON!</div>`;
-            await waitMs(5000); // Wait 5 seconds before resetting the game
-            resetGame(globalHTML, globalVariables);
-        }else{
-            // If there are players, reset the rage meter 
-            setRageMeter(globalHTML, globalVariables, 0);
-            pickNewPlayer(globalHTML, globalVariables);
-        }
-    }else {
-        pickNewPlayer(globalHTML, globalVariables);
-    }
 
     globalHTML.pokeButton.disabled = false; // Enable poke button
 }

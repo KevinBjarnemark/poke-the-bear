@@ -39,7 +39,7 @@ Here's a breakdown of some ideas and improvements to further develop this projec
 
 ### **Settings**
 
-At the landing page/start menu and perhaps accessible inside the game, a 'settings area' should be considered to both solve problems and enhance the user experience. Here's a breakdown of some of the settings that could be implemented. 
+At the landing page/start menu and perhaps accessible inside the game, a 'settings area' should be considered to both solve problems and to enhance the user experience. Here's a breakdown of some of the settings that could be implemented. 
 
 ##### **Temperament meter** 
 
@@ -47,6 +47,32 @@ At the landing page/start menu and perhaps accessible inside the game, a 'settin
 
 This could make it easier to speed up a game if it is a large group who is playing.
 
+### **Additional ideas** 
+
+Right now, the game is very limited in terms of possibilities. More features could easily be implemented to further increase the excitment when playing this game. Here's a list of some ideas.
+
+- **Spinning wheel**
+
+instead of just a poke button, a spinning wheel could be introduced. This wheel would randomly pick between a set of buttons. Button examples:
+
+1. Petting button
+
+A button that lets the user pet the bear, this would decrease the rage meter.
+
+2. Lazer pointer button
+
+This would definitely increase the rage meter
+
+3. Salmon button
+
+Give the button a salmon! This would bring the rage down to 0.
+
+- **List of other implementations**
+
+1. Delete all players button
+2. Rules pop-up at the game menu
+3. See who won in the previous game indicated by a star or similar
+4. Scoreboard
 
 ## Credits and resources
 
