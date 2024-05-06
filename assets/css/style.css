@@ -234,7 +234,7 @@ input {
     bottom: 5vh;
     left: 8vw;
     width: 45vw;
-    height: 48px;
+    height: 53px;
     border-radius: 4px;
     border: 2px solid #6d767d;
 }
@@ -349,7 +349,6 @@ input {
     /* Bear image */
     #bear img {
         height: 50vh;
-        width: auto; /* Force img scale proportionally */
     }
 }
 
@@ -367,7 +366,7 @@ input {
     #rage-meter {
         top: 13vh;
         left: 10vw;
-        width: 25vw;
+        width: 23vw;
     }
     /* Player hint */
     #player-hint {
@@ -378,7 +377,6 @@ input {
     /* Bear image */
     #bear img {
         height: 57vh;
-        width: auto; /* Force img scale proportionally */
     }
 }
 
@@ -396,7 +394,7 @@ input {
     #rage-meter {
         top: 13vh;
         left: 10vw;
-        width: 25vw;
+        width: 20vw;
     }
     /* Player hint */
     #player-hint {

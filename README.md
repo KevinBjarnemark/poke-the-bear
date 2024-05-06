@@ -1,22 +1,38 @@
+
+<link rel="stylesheet" type="text/css" media="all" href="assets/css/readme.css" />
+
 # Poke the bear!
 
 ## Introduction
 
-This is a simple JavaScript game inspired by the famous expression **'Poke the bear!'**. The game is an attempt to solve the 'real-world problem' of drawing a random person out of a group, but in a more fun and creative way. To exemplify this, imagine a family whose children want to sit in the front seat of the car. One could easily bring up **'Poke the bear!'** on their phone or computer to randomly choose one lucky winner. The one who survives the bear encounter gets to sit in the front seat of the car. 
+This is a simple JavaScript game inspired by the famous expression 
+<span class="em">'Poke the bear!'</span>. 
+The game is an attempt to solve the 'real-world problem' of drawing a random person out of a group but in a more 
+<span class="em" style="color: var(--green);">fun</span>
+and 
+<span class="em" style="color: var(--orange);">creative</span>
+way. 
 
-Since the winner is chosen randomly, a larger range of people can take part in the draw without the sensation of unfairness. 
+To exemplify this, imagine a family whose children want to sit in the front seat of the car. One could easily bring up 
+<span class="em">'Poke the bear!'</span>
+on their phone or computer to randomly choose one lucky winner. The one who survives the bear encounter gets to sit in the front seat of the car. 
 
-### Rules/instructions
+Since the winner is chosen randomly, a larger range of people can take part in the draw without the sensation of unfairness. Allowing children to have a chance against adults, as well as people with different kinds of disabilities, etc.
 
-1. Players are drawn randomly and should take turns in poking the bear. 
-2. As the players keep poking the bear while the rage meter increases, someone will eventually be kicked out of the game. 
-3. The 'last standing' player that survived the bear encounter takes the price.
+## Rules/instructions
+
+Again, to widen the 'range' of users, the game is very simple. Users can easily add their usernames to the landing page and enter the gaming realm. Inside the game, the quest is to take turns in poking the bear. For ultimate 'unpredictability', the hint message will **randomly** pick whose turn it is.
+
+As the players keep poking, the bear's furious rage will progressively increase. Eventually, someone will be kicked out of the game. This will reset the rage meter and allow the others to continue. The 'last standing' player that survived the hair-raising bear encounter takes the price.
 
 ## Features
 
-### **Landing page/start menu**
+#### Landing page/start menu
 
-#### Add players to the game
+<details>
+    <summary>
+        Add players to the game
+    </summary>
 
 The start menu enables the users to add their names to the player's list. This personalizes the game experience by sending 'custom-created' users into the game space. 
 
@@ -26,12 +42,19 @@ To prevent user inputs from destroying the interface, a certain criteria have to
 3. To avoid players choosing identical usernames.
 4. To limit the amount of players entering a game.
 
-- Minimum amount of players: **2**
-- Maximum amount of players: **150**
+- Minimum amount of players: 2
+- Maximum amount of players: 150
+</details>
 
-#### Remove players from the game
+<details>
+    <summary>
+        Remove players from the game
+    </summary>
 
-A system for removing players has been implemented to enhance the user experience. This solves 'real world' scenarios where a user might accidentally add a 'wrongly typed' username to the player's list or when an already registered player has to leave before the game starts. Users are able to instead simply click on the **red 'X' button** to remove a player from the player list.
+A system for removing players has been implemented to enhance the user experience. This solves 'real world' scenarios where a user might accidentally add a 'wrongly typed' username to the player's list or when an already registered player has to leave before the game starts. Users are able to instead simply click on the red 
+<span class="em" style="color: var(--red);">X</span>
+ button to remove a player from the player list.
+</details>
 
 ## Future implementations
 
@@ -65,7 +88,7 @@ This would definitely increase the rage meter
 
 3. Salmon button
 
-Give the button a salmon! This would bring the rage down to 0.
+Give the bear a salmon! This would bring the rage down to 0.
 
 - **List of other implementations**
 
@@ -80,6 +103,7 @@ Give the button a salmon! This would bring the rage down to 0.
 
 The fonts below were found at [Google fonts](https://fonts.google.com/).
 
+- [Tilt Neon](https://fonts.google.com/specimen/Tilt+Neon)
 - [Luckiest Guy](https://fonts.google.com/specimen/Luckiest+Guy)
 - [Niramit](https://fonts.google.com/specimen/Tilt+Neon)
 
