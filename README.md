@@ -131,20 +131,17 @@ I've never drawn a bear before, and I'm quite out of practice since I mostly wri
 
 The bear is drawn from imagination, although I did a quick Google search beforehand to refresh my memory of bear anatomy. Initially, I tried to draw the bear realistically, but later I felt that it didn't fully represent my vision. I also wanted to make the game inclusive for everyone, so I decided to sketch a more child-friendly version with soft paws.
 
-#### First illustration
+#### illustration (version 1)
 
 ![Bear Sketch 1](https://raw.githubusercontent.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/first_sketch.gif "Bear sketch 1")
 
-#### Second hand drawn sketch
+#### Hand-drawn sketch (version 2)
 
-!["The second hand drawn bear sketch"](assets/images/readMe/second_handrawn_sketch.jpg "Bear sketch")
+!["The second hand drawn bear sketch"](https://raw.github.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/second_handrawn_sketch.jpg "Bear hand-drawn sketch")
 
-#### Second illustration
+#### Illustration (version 2)
 
 ![Bear Sketch 2](https://raw.githubusercontent.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/second_sketch.gif "Bear sketch 2")
-
-
-
 
 ## Testing 
 
@@ -157,10 +154,8 @@ Here's the tools used to test this project against performance issues, accessibi
 
 ## Code 
 
-In this section some code I will go over some concepts reflected in the actual codebase of this project. 
+In this section, I will go over some concepts reflected in the actual codebase of this project. 
 
-### # 1
-
-#### Global scope
+### #1 Global scope
 
 The global Scope consists of key variables and elements that most of the functions need to access. For a small project like this, it's a great way to manage states in a 'global' way. As the project grows one may want to migrate to a library like React in order to manage states more efficiently. In that way, single entries in an object can hold references to defined variables. This would enable the developer to insert single entries or 'props' as a parameters to functions. If the intent is to continue this project in vanilla javascript, one can instead split objects that need to be referenced globally into smaller groups. This would prevent small functions from dealing with unnecessary data.

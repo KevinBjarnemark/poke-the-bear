@@ -3,7 +3,7 @@ import { waitMs, setInnerText,
 
 // Run when the DOM has finished loading
 document.addEventListener("DOMContentLoaded", function() {
-    // README! #1
+    // README reference! #1
 
     const globalHTML = {
         welcomeScreen: document.getElementById("welcome-screen"),
@@ -31,17 +31,17 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Event listeners [username, play button, add player]
-    globalHTML.usernameInput.addEventListener("change", (e) => {
-        globalVariables.usernameInput = e.target.value;});
+    globalHTML.usernameInput.addEventListener("input", (e) => {
+        handleUsernameInput(e, globalHTML, globalVariables);});
 
     globalHTML.addPlayerButton.addEventListener("click", () => {
         handleAddPlayerButtonClick(globalHTML, globalVariables)});
 
     globalHTML.playButton.addEventListener("click", () => {
-        handlePlayButtonClick(globalHTML, globalVariables)});
+        handlePlayButtonClick(globalHTML, globalVariables);});
 
     globalHTML.pokeButton.addEventListener("click", () => {
-        handlePoke(globalHTML, globalVariables)});
+        handlePoke(globalHTML, globalVariables);});
 
     runGameSetup(globalHTML, globalVariables);
 });
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 async function runGameSetup (globalHTML, globalVariables) {
     if (globalVariables?.firstLoad){
         // Temporarily show welcome screen on the first load
-        await waitMs(1000);
+        await waitMs(2000);
         // Hide the welcome screen and show game setup
         globalHTML.welcomeScreen.style.display = "none";
         globalHTML.gameSetup.style.display = "flex";
@@ -66,6 +66,51 @@ function resetGame (globalHTML, globalVariables) {
     globalHTML.gameSetup.style.display = "flex";
 }
 
+/**
+ * This checks the 'global' usernameInput and 
+ * sets the error elements if it fails the 
+ * validation tests.
+ * 
+ * @param {bool} globalHTML 
+ * @param {str} globalVariables 
+ * @returns {boolean} Returns true is the username is accepted
+ */
+function validateUsername (globalHTML, globalVariables) {
+    switch(true){
+        // Username length is less than 1 character
+        case globalVariables.usernameInput.length < 1: {
+            setInnerText(globalHTML.addPlayerError, 
+                "Username has to be at least 1 character");
+            setInnerText(globalHTML.playButtonError, "");
+            return false;
+        }
+        // Username is too long (24 characters)
+        case globalVariables.usernameInput.length >= 24: {
+            setInnerText(globalHTML.addPlayerError, "Username is too long");
+            setInnerText(globalHTML.playButtonError, "");
+            return false;
+        }
+        // Username already exists
+        case getChildrenValuesFromSpan(globalHTML.playerList, "innerText").includes(
+            globalVariables.usernameInput): {
+            setInnerText(globalHTML.addPlayerError, "Username already exists");
+            setInnerText(globalHTML.playButtonError, "");
+            return false;
+        }
+        // Run if validation passes
+        default: {
+            setInnerText(globalHTML.addPlayerError, "");
+            setInnerText(globalHTML.playButtonError, "");
+            return true;
+        }
+    }
+}
+
+function handleUsernameInput (e, globalHTML, globalVariables) {
+    globalVariables.usernameInput = e.target.value;
+    validateUsername(globalHTML, globalVariables);
+}
+
 function addPlayerToList (globalHTML, globalVariables) {
     // Create player element
     let playerElement = document.createElement("div");
@@ -77,7 +122,7 @@ function addPlayerToList (globalHTML, globalVariables) {
     // Create a 'remove player button'
     let removePlayerButton = document.createElement("button");
     removePlayerButton.innerText = "X";
-    removePlayerButton.className = "remove-player-button"
+    removePlayerButton.className = "remove-player-button";
     playerElement.appendChild(removePlayerButton);
     // Listen to the 'remove player click'
     removePlayerButton.addEventListener("click", function() {
@@ -98,31 +143,16 @@ function addPlayerToList (globalHTML, globalVariables) {
 }
 
 function handleAddPlayerButtonClick (globalHTML, globalVariables) {
+    const usernameIsAccepted = validateUsername(globalHTML, globalVariables);
     switch(true){
-        // Username length is less than 1 character
-        case globalVariables.usernameInput.length < 1: {
-            setInnerText(globalHTML.addPlayerError, 
-                "Username has to be at least 1 character");
-            setInnerText(globalHTML.playButtonError, "");
-            break;
-        }
-        // Username is too long (24 characters)
-        case globalVariables.usernameInput.length >= 24: {
-            setInnerText(globalHTML.addPlayerError, "Username is too long");
-            setInnerText(globalHTML.playButtonError, "");
+        // The username is not accepted 
+        case !usernameIsAccepted: {
             break;
         }
         // There are more than 10 players
         case globalHTML.playerList.children.length > 150: {
             setInnerText(globalHTML.addPlayerError, 
                 "The limit for this game is 150 players");
-            setInnerText(globalHTML.playButtonError, "");
-            break;
-        }
-        // Username already exists
-        case getChildrenValuesFromSpan(globalHTML.playerList, "innerText").includes(
-            globalVariables.usernameInput): {
-            setInnerText(globalHTML.addPlayerError, "Username already exists");
             setInnerText(globalHTML.playButtonError, "");
             break;
         }
@@ -198,11 +228,11 @@ async function handlePoke (globalHTML, globalVariables) {
     globalHTML.pokeButton.disabled = true;
     // Poke button transition effect 
     globalHTML.pokeButton.style.transform = "scale(0.9)";
-    await waitMs(50)
+    await waitMs(50);
     globalHTML.pokeButton.style.transform = "scale(1)";
     // Player hint transition effect
     globalHTML.playerHint.style.transform = "scale(0.7)";
-    await waitMs(150)
+    await waitMs(150);
     globalHTML.playerHint.style.transform = "scale(1)";
     /* Increment rage meter by 0-15 */
     setRageMeter(globalHTML, globalVariables, Math.random() * 15, true);

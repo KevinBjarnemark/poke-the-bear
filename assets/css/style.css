@@ -36,6 +36,7 @@
     --dark-blue-tint: #3E4349;
     --dark-gray: #4c5054;
     --gray: #565c64;
+    --light-gray: #899098;
     --green: #92d283;
 }
 
@@ -49,11 +50,24 @@ main {
 }
 
 /* General styles */
+
+h1 {
+    font-family: "Luckiest Guy", sans-serif;
+    font-size: 200%;
+    font-weight: 100;
+}
+
 input {
     background-color: var(--light-blue-tint);
     border: transparent;
+    padding: 5px;
+    min-width: 260px;
+}
+
+label {
     padding: 5px 0;
     min-width: 260px;
+    color: var(--light-gray)
 }
 
 .button {
@@ -116,6 +130,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--green);
 }
 
 /* Game setup */
@@ -144,8 +159,7 @@ input {
 
 /* Container for all players */
 #player-list-container {
-    min-width: 30vh;
-    max-width: 40vh;
+    width: 295px;
     min-height: 15vh;
     max-height: 37vh;
     padding: 5px;
