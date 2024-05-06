@@ -76,6 +76,11 @@ label {
     cursor: pointer;
 }
 
+/* For SEO optimization */
+.hidden-heading {
+    display: none;
+}
+
 .error-message {
     color: var(--error);
     padding: 8px 0;
@@ -303,17 +308,33 @@ label {
 }
 
 /* Poke button */
-#poke-button {
-    cursor: pointer;
+#poke-button-container {
     position: absolute;
     bottom: 11vh;
     right: 13vw;
     width: 21vw;
     height: 21vw;
+}
+
+#poke-button-container h3 {
+    position: absolute;
+    bottom: -30px;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    font-family: "Luckiest Guy", sans-serif;
+    font-size: 120%;
+    font-weight: 100;
+    color: var(--light-blue-tint);
+}
+#poke-button {
+    cursor: pointer;
     border: 2px solid #ffffff31;
     border-radius: 50%;
     background-color: #ffffff1f;
     transition: transform 0.1s;
+    width: 100%;
+    height: 100%;
 }
 #poke-button:hover {
     border: 4px solid #ffffff;
@@ -327,18 +348,6 @@ label {
     height: 68%;
 }
 
-#poke-button h3 {
-    position: absolute;
-    bottom: -30px;
-    text-align: center;
-    width: 100%;
-    text-transform: uppercase;
-    font-family: "Luckiest Guy", sans-serif;
-    font-size: 120%;
-    font-weight: 100;
-    color: var(--light-blue-tint);
-}
-
 /* 200px width and above */ 
 @media screen and (min-width: 200px) {
     #welcome-screen {
@@ -350,20 +359,15 @@ label {
     }
     /* Add player section */ 
     #add-player {
-        width: 200px
+        width: 200px;
     }
 
     /* Poke button */
-    #poke-button {
+    #poke-button-container  {
         bottom: 11vh;
         right: 12vw ;
         width: 15vw;
         height: 15vw;
-    }
-    /* Bear image */
-    #bear img {
-        height: 42vh;
-        width: auto; /* Force img scale proportionally */
     }
 }
 
@@ -375,13 +379,12 @@ label {
         left: 70vw;
         transform: translate(-50%, 2vh);
     }
-
     /* Add player section */ 
     #add-player {
         width: 200px
     }
     /* Poke button */
-    #poke-button {
+    #poke-button-container  {
         bottom: 11vh;
         right: 12vw ;
         width: 15vw;
@@ -397,14 +400,16 @@ label {
 @media screen and (min-width: 576px) {
     /* Add player section */ 
     #add-player {
-        width: 200px
+        width: 260px
     }
     /* Poke button */
-    #poke-button {
+    #poke-button-container  {
         bottom: 17vh;
         right: 16vw ;
         width: 10vw;
         height: 10vw;
+    }
+    #poke-button {
         border: 4px solid #ffffff31; 
     }
     /* Rage meter */
@@ -427,19 +432,6 @@ label {
 
 /* 768px width and above */
 @media screen and (min-width: 768px) {
-    /* Add player section */ 
-    #add-player {
-        width: 200px;
-        margin-top: 0;
-    }
-    /* Poke button */
-    #poke-button {
-        bottom: 17vh;
-        right: 16vw;
-        width: 10vw;
-        height: 10vw;
-        border: 4px solid #ffffff31; 
-    }
     /* Rage meter */
     #rage-meter {
         top: 13vh;
@@ -451,5 +443,13 @@ label {
         width: fit-content;
         top: 10vh;
         right: 17vw;
+    }
+}
+
+/* 1000px width and above */
+@media screen and (min-width: 1000px) {
+    /* Add player section */ 
+    #add-player {
+        margin-top: 0;
     }
 }

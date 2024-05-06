@@ -48,14 +48,15 @@
             </div>
             <!-- Add player component -->
             <section id="add-player">
+                <h2 class="hidden-heading">Add player section</h2>
                 <!-- Error handeling -->
                 <div class="error-message" id="add-player-error"></div>
-                <label for="username">Type in your username</label>
+                <label for="username-input">Type your username</label>
                 <input type="text" name="username" placeholder="eg. Breaker of worlds" 
-                    id="username-input"></input>
+                    id="username-input">
                     <!-- Add player button -->
                 <button class="button" id="add-player-button">
-                    <h3>Add player</h3>
+                    Add player
                 </button>
             </section>
         </div>
@@ -74,11 +75,13 @@
                     alt="A bear lying down">
             </div>
             <!-- Poke button -->
-            <button id="poke-button">
+            <div id="poke-button-container">
                 <h3>Poke</h3>
-                <img src="assets/images/icons/poking_stick.png" width="256" height="256" 
-                    alt="A poking stick">
-            </button>
+                <button id="poke-button">
+                    <img src="assets/images/icons/poking_stick.png" width="256" height="256" 
+                        alt="A poking stick">
+                </button>
+            </div>
         </div>
     </main>
     
