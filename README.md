@@ -131,8 +131,20 @@ I've never drawn a bear before, and I'm quite out of practice since I mostly wri
 
 The bear is drawn from imagination, although I did a quick Google search beforehand to refresh my memory of bear anatomy. Initially, I tried to draw the bear realistically, but later I felt that it didn't fully represent my vision. I also wanted to make the game inclusive for everyone, so I decided to sketch a more child-friendly version with soft paws.
 
-!["Different screensizes of the webpage"](assets/images/readMe/first_sketch.gif "Layout")
-!["Different screensizes of the webpage"](assets/images/readMe/second_sketch.gif "Layout")
+#### First illustration
+
+![Bear Sketch 1](https://raw.githubusercontent.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/first_sketch.gif "Bear sketch 1")
+
+#### Second hand drawn sketch
+
+!["The second hand drawn bear sketch"](assets/images/readMe/second_handrawn_sketch.jpg "Bear sketch")
+
+#### Second illustration
+
+![Bear Sketch 2](https://raw.githubusercontent.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/second_sketch.gif "Bear sketch 2")
+
+
+
 
 ## Testing 
 
