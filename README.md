@@ -35,12 +35,12 @@ As the players keep poking, the bear's furious rage will progressively increase.
 
 <details>
     <summary>
-        Add players to the game
+        Add players
     </summary>
 
 The start menu enables the users to add their names to the player's list. This personalizes the game experience by sending 'custom-created' users into the game space. 
 
-To prevent user inputs from destroying the interface, a certain criteria have to be met for the players to grant access to the game space. The users are constrained to follow these criteria for the following reasons:
+To prevent user inputs from destroying the interface, among other things, certain criteria must be met for the players to gain access to the game space. The users are constrained to follow these criteria for the following reasons:
 1. To avoid breaking the underlying game logic.
 2. To avoid breaking the UI with 'lengthy' usernames, or usernames without characters.
 3. To avoid players choosing identical usernames.
@@ -52,19 +52,22 @@ To prevent user inputs from destroying the interface, a certain criteria have to
 
 <details>
     <summary>
-        Remove players from the game
+        Remove players
     </summary>
 
-A system for removing players has been implemented to enhance the user experience. This solves 'real world' scenarios where a user might accidentally add a 'wrongly typed' username to the player's list or when an already registered player has to leave before the game starts. Users are able to instead simply click on the red 
+A player removal system has been implemented to enhance the user experience. It addresses real-world scenarios such as when a user mistakenly adds an incorrectly typed username to the player list, or when a registered player needs to leave before the game starts. Users can simply click the red 
 <span class="em" style="color: var(--red);">X</span>
- button to remove a player from the player list.
+button to remove a player from the list.
 </details>
 
 ## Future implementations
 
 Here's a breakdown of some ideas and improvements to further develop this project.
 
-### **Settings**
+<details>
+    <summary>
+        Settings
+    </summary>
 
 At the landing page/start menu and perhaps accessible inside the game, a 'settings area' should be considered to both solve problems and to enhance the user experience. Here's a breakdown of some of the settings that could be implemented. 
 
@@ -73,33 +76,42 @@ At the landing page/start menu and perhaps accessible inside the game, a 'settin
 - A setting that sets how easily the bear will be provoked.
 
 This could make it easier to speed up a game if it is a large group who is playing.
+</details>
 
-### **Additional ideas** 
+<details>
+    <summary>
+        Ideas
+    </summary>
 
 Right now, the game is very limited in terms of possibilities. More features could easily be implemented to further increase the excitment when playing this game. Here's a list of some ideas.
 
-- **Spinning wheel**
+#### **Spinning wheel** 
 
-instead of just a poke button, a spinning wheel could be introduced. This wheel would randomly pick between a set of buttons. Button examples:
+instead of just a poke button, a spinning wheel could be introduced. This wheel would randomly pick between a set of buttons. Here's some ideas for buttons to implement:
 
-1. Petting button
+- **Petting button**
 
 A button that lets the user pet the bear, this would decrease the rage meter.
 
-2. Lazer pointer button
+- **Lazer pointer button**
 
 This would definitely increase the rage meter
 
-3. Salmon button
+- **Salmon button**
 
 Give the bear a salmon! This would bring the rage down to 0.
+</details>
 
-- **List of other implementations**
+<details>
+    <summary>
+        More
+    </summary>
 
 1. Delete all players button
 2. Rules pop-up at the game menu
 3. See who won in the previous game indicated by a star or similar
 4. Scoreboard
+</details>
 
 ## Credits and resources
 
@@ -111,10 +123,16 @@ The fonts below were found at [Google fonts](https://fonts.google.com/).
 - [Luckiest Guy](https://fonts.google.com/specimen/Luckiest+Guy)
 - [Niramit](https://fonts.google.com/specimen/Tilt+Neon)
 
-### Images, icons, videos, logo and favicon Information
+### Art & design (images, icons, etc.)
 
-- All images and icons has been designed, illustrated, and drawn by the creator of this Github repository Kevin Bjarnemark.
+All images, icons, logos, etc., have been designed, illustrated, and drawn by the creator of this GitHub repository, Kevin Bjarnemark. I'm that person, so I'll describe myself in the first person in this chapter.
 
+I've never drawn a bear before, and I'm quite out of practice since I mostly write code these days. Obviously, the bear in this project isn't a professional design. However, after working in public schools, I've noticed that children generally tend to prefer designs that are 'unprofessional'.
+
+The bear is drawn from imagination, although I did a quick Google search beforehand to refresh my memory of bear anatomy. Initially, I tried to draw the bear realistically, but later I felt that it didn't fully represent my vision. I also wanted to make the game inclusive for everyone, so I decided to sketch a more child-friendly version with soft paws.
+
+!["Different screensizes of the webpage"](assets/images/readMe/first_sketch.gif "Layout")
+!["Different screensizes of the webpage"](assets/images/readMe/second_sketch.gif "Layout")
 
 ## Testing 
 
