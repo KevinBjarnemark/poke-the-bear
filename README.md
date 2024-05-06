@@ -1,5 +1,77 @@
 
-<link rel="stylesheet" type="text/css" media="all" href="assets/css/readme.css" />
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+/*#region ---------- Variables ----------------*/
+:root {
+    --red:#dd5555;
+    --white: #e0e7ec;
+    --gray: #929aa1;
+    --cyan:#63a9e6;
+    --orange:#ffbe74;
+    --blue:#81aace;
+    --green:#75c973;
+
+    --font-regular: 'Tilt Neon', sans-serif;
+    --font-fat: 'Luckiest Guy', cursive;
+}
+/*#endregion ---------------------------------*/
+
+*{
+    font-family: var(--font-regular);
+    font-size: 15px;
+    font-weight: 100;
+    color: var(--white)
+}
+
+h1 {
+    color: var(--white)
+}
+
+h3 {
+    color: var(--white);
+    text-decoration: solid underline #90979c 1.5px;
+}
+
+h4 {
+    color: var(--white);
+    text-decoration: solid underline #90979c 1.5px;
+}
+
+p {
+    color: var(--gray);
+}
+
+span {
+    color: var(--white);
+}
+
+em {
+    color: var(--white);
+    font-style: normal;
+    font-weight: 100;
+}
+
+.em {
+    color: var(--white);
+    font-style: normal;
+    font-weight: 100;
+    font-family: var(--font-fat);
+    color: #cad2d7
+}
+
+details {
+    font-size: 16px;
+    color: var(--gray)
+}
+
+summary {
+    color: var(--orange);
+    cursor: pointer;
+}
+</style>
 
 # Poke the bear!
 
