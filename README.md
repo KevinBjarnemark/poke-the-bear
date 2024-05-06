@@ -1,13 +1,11 @@
 
-
-<style>
-p {
-    color: #929aa1;
-    font-family: 'Luckiest Guy', cursive;
-}
-</style>
+<link rel="stylesheet" type="text/css" media="all" href="assets/css/readme.css" />
 
 # Poke the bear!
+
+## TIP!
+
+If you want to view this document with more intricate styling, you can clone this project and preview it in your code editor eg. VS Code.  
 
 ## Introduction
 
