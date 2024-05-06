@@ -67,9 +67,8 @@ function resetGame (globalHTML, globalVariables) {
 }
 
 /**
- * This checks the 'global' usernameInput and 
- * sets the error elements if it fails the 
- * validation tests.
+ * This sets the error elements if the username 
+ * fails the validation tests.
  * 
  * @param {bool} globalHTML 
  * @param {str} globalVariables 
@@ -106,6 +105,14 @@ function validateUsername (globalHTML, globalVariables) {
     }
 }
 
+/**
+ * This sets the 'global' username input and checks 
+ * validates the username on input
+ * 
+ * @param {Event} e The event from the event listener
+ * @param {bool} globalHTML 
+ * @param {str} globalVariables 
+ */
 function handleUsernameInput (e, globalHTML, globalVariables) {
     globalVariables.usernameInput = e.target.value;
     validateUsername(globalHTML, globalVariables);
@@ -114,10 +121,6 @@ function handleUsernameInput (e, globalHTML, globalVariables) {
 function addPlayerToList (globalHTML, globalVariables) {
     // Create player element
     let playerElement = document.createElement("div");
-    // Set the player name as the innerText
-    let usernameSpan = document.createElement("span");
-    setInnerText(usernameSpan, globalVariables.usernameInput);
-    playerElement.appendChild(usernameSpan);
 
     // Create a 'remove player button'
     let removePlayerButton = document.createElement("button");
@@ -131,6 +134,11 @@ function addPlayerToList (globalHTML, globalVariables) {
         button clicks */
         playerElement.remove(); 
     });
+
+    // Set the player name as the innerText
+    let usernameSpan = document.createElement("span");
+    setInnerText(usernameSpan, globalVariables.usernameInput);
+    playerElement.appendChild(usernameSpan);
 
     // Push player element to container
     globalHTML.playerList.appendChild(playerElement);
@@ -147,6 +155,7 @@ function handleAddPlayerButtonClick (globalHTML, globalVariables) {
     switch(true){
         // The username is not accepted 
         case !usernameIsAccepted: {
+            // Errors are handled in the validateUsername function
             break;
         }
         // There are more than 10 players
