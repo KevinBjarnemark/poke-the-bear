@@ -141,7 +141,7 @@ The bear is drawn from imagination, although I did a quick Google search beforeh
 
 #### Hand-drawn sketch (version 2)
 
-!["The second hand drawn bear sketch"](https://raw.github.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/second_handrawn_sketch.jpg "Bear hand-drawn sketch")
+!["The second hand drawn bear sketch"](https://raw.github.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/second_handrawn_sketch.webp "Bear hand-drawn sketch")
 
 #### Illustration (version 2)
 
@@ -155,6 +155,11 @@ Here's the tools used to test this project against performance issues, accessibi
 - [W3C validator](https://validator.w3.org/)
 - [Jigsaw validator](https://jigsaw.w3.org/css-validator/)
 - [JsHint](https://jshint.com/)
+
+![The testing results from Lighthouse](assets/images/readme/testing_scores/lighthouse_score.gif "Lighthouse score")
+![The testing results from Jigsaw](assets/images/readme/testing_scores/Jigsaw_score.jpg "Jigsaw score")
+![The testing results from w3c](assets/images/readme/testing_scores/w3c_score.jpg "w3c score")
+
 
 ## Code
 In this section, I will go over some concepts reflected in the actual codebase of this project. 

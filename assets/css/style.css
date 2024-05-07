@@ -64,7 +64,7 @@ input {
 
 label {
     padding: 5px 0;
-    color: var(--light-gray)
+    color: var(--light-blue-tint)
 }
 
 .button {
@@ -203,9 +203,16 @@ label {
 #play-button {
     margin-top: 8px;
     background-color: var(--green);
+    color: #ffffff;
     text-transform: uppercase;
     font-weight: 400;
     font-size: 120%;
+    /* Set a strong contras for accessibility */
+    text-shadow: 
+    -1px -1px 2px var(--gray), /* Top-left */
+    1px -1px 2px var(--gray),  /* Top-right */
+    -1px 1px 2px var(--gray),  /* Bottom-left */
+    1px 1px 2px var(--gray);   /* Bottom-right */
 }
 #play-button:hover {
     box-shadow: 0 0 5px 1px #ffffff;

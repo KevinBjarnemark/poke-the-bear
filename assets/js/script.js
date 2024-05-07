@@ -58,7 +58,7 @@ async function runGameSetup (globalHTML, globalVariables) {
 }
 
 function resetGame (globalHTML, globalVariables) {
-    globalHTML.bearImage.src = `assets/images/bear/bear_0.png`;
+    globalHTML.bearImage.src = `assets/images/bear/bear_0.webp`;
     globalHTML.bearImage.alt = "A bear lying down";
     setRageMeter(globalHTML, globalVariables, 0);
     // Hide the game area and show game setup
@@ -277,7 +277,7 @@ async function handlePoke (globalHTML, globalVariables) {
         updatedBearStyle.imageName = 66;
         updatedBearStyle.alt = "An angry bear standing up";
     }
-    globalHTML.bearImage.src = `assets/images/bear/bear_${updatedBearStyle.imageName}.png`;
+    globalHTML.bearImage.src = `assets/images/bear/bear_${updatedBearStyle.imageName}.webp`;
     globalHTML.bearImage.alt = updatedBearStyle.alt;
 
     globalHTML.pokeButton.disabled = false; // Enable poke button
