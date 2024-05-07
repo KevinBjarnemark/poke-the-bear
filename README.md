@@ -23,6 +23,8 @@ on their phone or computer to randomly choose one lucky winner. The one who surv
 
 Since the winner is chosen randomly, a larger range of people can take part in the draw without the sensation of unfairness. Allowing children to have a chance against adults, as well as people with different kinds of disabilities, etc.
 
+Click [here](https://kevinbjarnemark.github.io/poke-the-bear/) to visit the deployed version of this website.
+
 #### Definition
 **Poke the bear** - To deliberately provoke or antagonize a person or group, esp. one that is dangerous or powerful. 
 [Source](https://www.oed.com/dictionary/bear_n1?tab=meaning_and_use#1266599020)
@@ -137,15 +139,15 @@ The bear is drawn from imagination, although I did a quick Google search beforeh
 
 #### illustration (version 1)
 
-![Bear Sketch 1](https://raw.githubusercontent.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/first_sketch.gif "Bear sketch 1")
+![The first 'realistic' illustration of the bear](assets/images/readme/artwork/first_illustration.gif "Bear illustration 1")
 
 #### Hand-drawn sketch (version 2)
 
-!["The second hand drawn bear sketch"](https://raw.github.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/second_handrawn_sketch.webp "Bear hand-drawn sketch")
+!["The hand-drawn 'child-friendly' bear sketch"](assets/images/readme/artwork/second_handrawn_sketch.webp "Hand-drawn 'child-friendly' version")
 
 #### Illustration (version 2)
 
-![Bear Sketch 2](https://raw.githubusercontent.com/KevinBjarnemark/poke-the-bear/main/assets/images/readme/second_sketch.gif "Bear sketch 2")
+!["The hand-drawn 'child-friendly' bear illustration"](assets/images/readme/artwork/second_illustration.gif "'Child-friendly' bear illustration")
 
 ## Testing 
 
@@ -156,10 +158,18 @@ Here's the tools used to test this project against performance issues, accessibi
 - [Jigsaw validator](https://jigsaw.w3.org/css-validator/)
 - [JsHint](https://jshint.com/)
 
+The tests below have been run locally and may not be as favorable when testing the deployed site (with the extension tool). 
+
 ![The testing results from Lighthouse](assets/images/readme/testing_scores/lighthouse_score.gif "Lighthouse score")
 ![The testing results from Jigsaw](assets/images/readme/testing_scores/Jigsaw_score.jpg "Jigsaw score")
 ![The testing results from w3c](assets/images/readme/testing_scores/w3c_score.jpg "w3c score")
 
+## Deployment
+
+This project was deployed through [GitHub](https://github.com/) pages. It is a service that simplifies the deployment by automatically deploying whenever you push changes to your GitHub project.
+- Select the default branch (main) (in the settings).
+- Wait for GitHub to build your project.
+- Done! 
 
 ## Code
 In this section, I will go over some concepts reflected in the actual codebase of this project. 

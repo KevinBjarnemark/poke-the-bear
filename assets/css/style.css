@@ -130,10 +130,14 @@ label {
 /* Welcome screen */
 #welcome-screen {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--green);
+    color: var(--light-blue-tint);
     font-size: 10px;
+}
+#welcome-screen h1:first-child {
+    color: var(--green);
 }
 
 /* Game setup */

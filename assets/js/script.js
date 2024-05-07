@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 async function runGameSetup (globalHTML, globalVariables) {
     if (globalVariables?.firstLoad){
         // Temporarily show welcome screen on the first load
-        await waitMs(2000);
+        await waitMs(3000);
         // Hide the welcome screen and show game setup
         globalHTML.welcomeScreen.style.display = "none";
         globalHTML.gameSetup.style.display = "flex";
