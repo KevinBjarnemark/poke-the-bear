@@ -23,6 +23,10 @@ on their phone or computer to randomly choose one lucky winner. The one who surv
 
 Since the winner is chosen randomly, a larger range of people can take part in the draw without the sensation of unfairness. Allowing children to have a chance against adults, as well as people with different kinds of disabilities, etc.
 
+#### Definition
+**Poke the bear** - To deliberately provoke or antagonize a person or group, esp. one that is dangerous or powerful. 
+[Source](https://www.oed.com/dictionary/bear_n1?tab=meaning_and_use#1266599020)
+
 ## Rules/instructions
 
 Again, to widen the 'range' of users, the game is very simple. Users can easily add their usernames to the landing page and enter the gaming realm. Inside the game, the quest is to take turns in poking the bear. For ultimate 'unpredictability', the hint message will **randomly** pick whose turn it is.
@@ -152,10 +156,23 @@ Here's the tools used to test this project against performance issues, accessibi
 - [Jigsaw validator](https://jigsaw.w3.org/css-validator/)
 - [JsHint](https://jshint.com/)
 
-## Code 
-
+## Code
 In this section, I will go over some concepts reflected in the actual codebase of this project. 
 
-### #1 Global scope
+#### Maintainability & optimization
 
-The global Scope consists of key variables and elements that most of the functions need to access. For a small project like this, it's a great way to manage states in a 'global' way. As the project grows one may want to migrate to a library like React in order to manage states more efficiently. In that way, single entries in an object can hold references to defined variables. This would enable the developer to insert single entries or 'props' as a parameters to functions. If the intent is to continue this project in vanilla javascript, one can instead split objects that need to be referenced globally into smaller groups. This would prevent small functions from dealing with unnecessary data.
+This project has been built with maintainability in mind. In this chapter, we'll briefly review some workflows that align well with the current structure of the project. Code references are listed at the end. 
+
+##### CSS variables
+
+If the developer wants to change the color of a specific asset (or group of assets), minimal work should be required. The color should be set at the top of the CSS document without the hassle of searching through multiple locations to change a single color. This also optimizes performance since the browser has less data to handle. For instance, the browser can choose between three grays instead of a multitude of different shades."
+
+##### Globally available functions
+
+Functions that the developer may need to access in the future should be easily available for future use. Nested functions should be carefully considered, as the developer might want to run a function from a different angle (e.g., settings menu, API, etc.). This process should be simple, requiring minimal work to access the desired functionality.
+
+#### Code references
+
+##### #1 Global scope
+
+The global scope consists of key variables and elements that many functions need to access. For a small project like this, it's an effective way to manage state globally. However, as the project grows, it may be beneficial to switch to a state management library like React for more efficient state handling. In this way, individual entries in an object can reference specific variables, allowing the developer to pass single entries or 'props' as parameters to functions. If the project continues in vanilla JavaScript, objects that need global references can be split into smaller groups. This prevents smaller functions from handling unnecessary data.
