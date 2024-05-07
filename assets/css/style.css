@@ -156,7 +156,7 @@ label {
 }
 
 /* Player list outer-most container  */ 
-#game-setup > div {
+#game-setup #player-list-section {
     display: flex;
     position: absolute;
     /* Force elements to be centered */
@@ -385,7 +385,7 @@ label {
 /* 350px width and above */ 
 @media screen and (min-width: 320px) {
     /* Game set up elements */
-    #game-setup > div {
+    #game-setup #player-list-section {
         top: 2vh;
         left: 70vw;
         transform: translate(-50%, 2vh);

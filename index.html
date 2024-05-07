@@ -22,9 +22,13 @@
     <main>
         <!-- Environment (background) -->
         <div id="background-environment">
-            <img id="mountains" src="assets/images/environment/mountains.webp" 
-                width="1080" height="168" 
-                alt="Mountains in the background">
+            <img 
+                id="mountains" 
+                src="assets/images/environment/mountains.webp" 
+                width="1080" 
+                height="168" 
+                alt="Mountains in the background"
+            >
             <div id="horizon"></div>
         </div>
         <!-- Welcome screen -->
@@ -36,7 +40,7 @@
         <!-- Game setup -->
         <div id="game-setup" class="main-area">
             <!-- Element that lists all players -->
-            <div>
+            <section id="player-list-section">
                 <h3>Players</h3>
                 <div id="player-list-container">
                     <div id="player-list"></div>
@@ -47,7 +51,8 @@
                 </button>
                 <!-- Error handeling -->
                 <div class="error-message" id="play-button-error"></div>
-            </div>
+            </section>
+
             <!-- Add player component -->
             <section id="add-player">
                 <h2 class="hidden-heading">Add player section</h2>

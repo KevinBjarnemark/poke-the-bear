@@ -75,6 +75,11 @@ function resetGame (globalHTML, globalVariables) {
  * @returns {boolean} Returns true is the username is accepted
  */
 function validateUsername (globalHTML, globalVariables) {
+    const existingUsernames = getChildrenValuesFromSpan(
+        globalHTML.playerList, 
+        "innerText"
+    );
+
     switch(true){
         // Username length is less than 1 character
         case globalVariables.usernameInput.length < 1: {
@@ -90,8 +95,7 @@ function validateUsername (globalHTML, globalVariables) {
             return false;
         }
         // Username already exists
-        case getChildrenValuesFromSpan(globalHTML.playerList, "innerText").includes(
-            globalVariables.usernameInput): {
+        case existingUsernames.includes(globalVariables.usernameInput): {
             setInnerText(globalHTML.addPlayerError, "Username already exists");
             setInnerText(globalHTML.playButtonError, "");
             return false;
@@ -198,8 +202,9 @@ function setRageMeter (globalHTML, globalVariables, value, increment=false) {
     }else{
         globalVariables.rageMeter = value;
     }
-    // Set (and limit) the css width accordalHTML.bearImageingly
-    globalHTML.filledRageMeter.style.width = `${Math.min(globalVariables.rageMeter, 100)}%`;
+    // Set (and limit) the css width
+    globalHTML.filledRageMeter.style.width = 
+        `${Math.min(globalVariables.rageMeter, 100)}%`;
 }
 
 /**
@@ -213,7 +218,13 @@ function kickChosenPlayer (globalHTML, globalVariables) {
     globalVariables.alivePlayers = globalVariables.alivePlayers.filter(
         player => player !== globalVariables.chosenPlayer);
     globalHTML.playerHint.innerHTML = 
-        `<div>${globalVariables.chosenPlayer}</div><div style="color: var(--red); font-family: 'Luckiest Guy', sans-serif;">YOU'RE OUT</div>`;
+        `<div>${globalVariables.chosenPlayer}</div>
+        <div style="
+        color: var(--red); 
+        font-family: 'Luckiest Guy', sans-serif;
+        ">
+        YOU'RE OUT
+        </div>`;
 }
 
 /**
@@ -225,11 +236,18 @@ function kickChosenPlayer (globalHTML, globalVariables) {
  * @param {Object} globalVariables 
  */
 function pickNewPlayer (globalHTML, globalVariables) {
-    const chosenPlayerIndex = Math.floor(Math.random() * 
-        globalVariables.alivePlayers.length);
-    globalVariables.chosenPlayer = globalVariables.alivePlayers[chosenPlayerIndex];
-    globalHTML.playerHint.innerHTML = 
-        `<div>${globalVariables.chosenPlayer}</div><div>IT'S YOUR TURN!</div>`;
+    // Calculate new random index
+    const chosenPlayerIndex = Math.floor(
+        Math.random() * globalVariables.alivePlayers.length
+    );
+    // Update state
+    const chosenPlayer = globalVariables.alivePlayers[chosenPlayerIndex];
+    globalVariables.chosenPlayer = chosenPlayer;
+    // Update the player hint
+    globalHTML.playerHint.innerHTML = `
+        <div>${globalVariables.chosenPlayer}</div>
+        <div>IT'S YOUR TURN!</div>
+    `;
 }
 
 async function handlePoke (globalHTML, globalVariables) {
@@ -252,8 +270,14 @@ async function handlePoke (globalHTML, globalVariables) {
         await waitMs(2000); // Wait 2 seconds
         // If there's only one player left, declare a winner 
         if (globalVariables.alivePlayers.length === 1){
-            globalHTML.playerHint.innerHTML = 
-                `<div>${globalVariables.alivePlayers[0]}</div><div style="color: var(--green); font-family: 'Luckiest Guy', sans-serif;">YOU WON!</div>`;
+            globalHTML.playerHint.innerHTML = `
+            <div>${globalVariables.alivePlayers[0]}</div>
+            <div style="
+            color: var(--green); 
+            font-family: 'Luckiest Guy', sans-serif;
+            ">
+            YOU WON!
+            </div>`;
                 await waitMs(5000); // Wait 5 seconds before resetting the game
             resetGame(globalHTML, globalVariables);
         }else{
@@ -265,7 +289,8 @@ async function handlePoke (globalHTML, globalVariables) {
         pickNewPlayer(globalHTML, globalVariables);
     }
 
-    // Change the bear image at specified levels + SEO & accessibility optimization
+    /* Change the bear image at specified levels + SEO & 
+    accessibility optimization */
     let updatedBearStyle = {};
     if (globalVariables.rageMeter < 33) {
         updatedBearStyle.imageName = 0;
@@ -277,7 +302,8 @@ async function handlePoke (globalHTML, globalVariables) {
         updatedBearStyle.imageName = 66;
         updatedBearStyle.alt = "An angry bear standing up";
     }
-    globalHTML.bearImage.src = `assets/images/bear/bear_${updatedBearStyle.imageName}.webp`;
+    globalHTML.bearImage.src = 
+        `assets/images/bear/bear_${updatedBearStyle.imageName}.webp`;
     globalHTML.bearImage.alt = updatedBearStyle.alt;
 
     globalHTML.pokeButton.disabled = false; // Enable poke button
