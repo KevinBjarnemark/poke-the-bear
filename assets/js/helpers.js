@@ -31,7 +31,7 @@ export function getChildrenValuesFromSpan (childrenObj, entry) {
 export const waitMs = async (ms) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve(true)
+            resolve(true);
         }, ms);
     });
 };

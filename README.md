@@ -5,7 +5,9 @@
 
 ## TIP!
 
-If you want to view this document with more intricate styling, you can clone this project and preview it in your code editor eg. VS Code.  
+If you want to view this document with more intricate styling, you can clone this project and preview it in your code editor eg. VS Code. 
+
+<span class="em" style="color: var(--gray);">Or, maybe you're already here 😀</span>
 
 ## Introduction
 
@@ -40,6 +42,7 @@ As the players keep poking, the bear's furious rage will progressively increase.
 ## Features
 
 #### Landing page/start menu
+!["Preview of the start menu before entering a game"](assets/images/readme/start_menu.webp "Start menu")
 
 <details>
     <summary>
@@ -68,9 +71,21 @@ A player removal system has been implemented to enhance the user experience. It 
 button to remove a player from the list.
 </details>
 
+#### Gameplay
+!["Preview of the gameplay"](assets/images/readme/gameplay.webp "Gameplay")
+
+As already emphasized, the goal is to let everybody on board. Therefore, when the player hint tells you it's your turn, you simply click the poke button. A new player will be drawn and you might have to poke the ferocious rageboiling bear twice! 
+
 ## Future implementations
 
 Here's a breakdown of some ideas and improvements to further develop this project.
+
+<details>
+    <summary>
+        Error handling
+    </summary>
+As of right now, javascript functions are heavily tested and precautions (eg. if statements) are in place to prevent the website from breaking if an error were to occur. A system that displays 'user-friendly' errors should be developed and triggered by perhaps try-and-catch blocks throughout the source code. 
+</details>
 
 <details>
     <summary>
@@ -78,6 +93,9 @@ Here's a breakdown of some ideas and improvements to further develop this projec
     </summary>
 
 At the landing page/start menu and perhaps accessible inside the game, a 'settings area' should be considered to both solve problems and to enhance the user experience. Here's a breakdown of some of the settings that could be implemented. 
+
+##### **Sound** 
+- To both amplify the accessibility and enhance the user experience, sounds should be implemented. A voice that tells the players which turn it is and in-game sounds eg. when the rage meter is increasing.
 
 ##### **Temperament meter** 
 
