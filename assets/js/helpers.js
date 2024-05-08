@@ -25,8 +25,8 @@ export function getChildrenValuesFromSpan (childrenObj, entry) {
  * Waits for a specified number of milliseconds.
  * This function can be used to introduce a delay in asynchronous operations.
  *
- * @param {number} ms The number of milliseconds to wait before resolving the promise.
- * @returns {Promise<boolean>} A promise that resolves to true after the specified delay.
+ * @param {number} ms - The number of milliseconds to wait.
+ * @returns {Promise<boolean>} Resolves to true after the specified delay.
  */
 export const waitMs = async (ms) => {
     return new Promise((resolve) => {

@@ -29,14 +29,14 @@
 
 /* Variables */
 :root {
-    --error: #fe6060;
-    --red: #e35050;
-    --light-red: #e46c6c;
     --light-blue-tint: #dee4eb;
     --dark-blue-tint: #3E4349;
     --dark-gray: #4c5054;
     --gray: #565c64;
     --light-gray: #899098;
+    --red: #e35050;
+    --light-red: #e46c6c;
+    --error: #fe6060;
     --green: #92d283;
 }
 
@@ -67,6 +67,7 @@ label {
     color: var(--light-blue-tint)
 }
 
+/* Notice that this is a 'general class' */
 .button {
     padding: 5px 20px;
     border: none;
@@ -136,6 +137,7 @@ label {
     color: var(--light-blue-tint);
 }
 
+/* Welcome screen */
 .page-title {
     font-family: "Luckiest Guy", sans-serif;
     font-size: 100%;
@@ -214,7 +216,7 @@ label {
     text-transform: uppercase;
     font-weight: 400;
     font-size: 120%;
-    /* Set a strong contras for accessibility */
+    /* Set a strong contrast for accessibility */
     text-shadow: 
     -1px -1px 2px var(--gray), /* Top-left */
     1px -1px 2px var(--gray),  /* Top-right */
@@ -245,7 +247,7 @@ label {
     font-size: 95%;
     transition: transform 0.1s;
 }
-
+/* Make the username stand out */
 #player-hint :first-child {
     animation-name: shaking-animation;
     animation-duration: 2.5s; 
