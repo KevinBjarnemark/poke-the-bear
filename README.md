@@ -25,6 +25,8 @@ Since the winner is chosen randomly, a larger range of people can take part in t
 
 Click [here](https://kevinbjarnemark.github.io/poke-the-bear/) to visit the deployed version of this website.
 
+!["Preview of the website on different screen sizes"](assets/images/readMe/screen_sizes.webp "Layout")
+
 #### Definition
 **Poke the bear** - To deliberately provoke or antagonize a person or group, esp. one that is dangerous or powerful. 
 [Source](https://www.oed.com/dictionary/bear_n1?tab=meaning_and_use#1266599020)
@@ -161,8 +163,8 @@ Here's the tools used to test this project against performance issues, accessibi
 The tests below have been run locally and may not be as favorable when testing the deployed site (with the extension tool). 
 
 ![The testing results from Lighthouse](assets/images/readme/testing_scores/lighthouse_score.gif "Lighthouse score")
-![The testing results from Jigsaw](assets/images/readme/testing_scores/Jigsaw_score.jpg "Jigsaw score")
-![The testing results from w3c](assets/images/readme/testing_scores/w3c_score.jpg "w3c score")
+![The testing results from Jigsaw](assets/images/readme/testing_scores/Jigsaw_score.webp "Jigsaw score")
+![The testing results from w3c](assets/images/readme/testing_scores/w3c_score.webp "w3c score")
 
 ## Deployment
 

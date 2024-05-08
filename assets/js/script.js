@@ -278,8 +278,10 @@ async function handlePoke (globalHTML, globalVariables) {
             ">
             YOU WON!
             </div>`;
-                await waitMs(5000); // Wait 5 seconds before resetting the game
+            globalHTML.playerHint.style.transform = "scale(1.4)"
+            await waitMs(6500); // Wait 5 seconds before resetting the game
             resetGame(globalHTML, globalVariables);
+            globalHTML.playerHint.style.transform = "scale(1)"
         }else{
             // If there are players, reset the rage meter 
             setRageMeter(globalHTML, globalVariables, 0);
