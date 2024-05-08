@@ -4,9 +4,9 @@
  * span inside an HTML element. It extracts each value from each span 
  * and outputs an array containing all the values.
  * 
- * @param {object} childrenObj The object that contains the children.
+ * @param {HTMLElement} childrenObj The object that contains the children.
  * @param {string} entry The entry that should be listed in the 
- * outputed array eg. innerText.
+ * outputted array eg. innerText.
  * @returns {Array} The array containing the values extracted from 
  * the children's entries.
  */
@@ -39,11 +39,11 @@ export const waitMs = async (ms) => {
 /**
  * Sets the inner text of an HTML element
  * 
- * @param {object} element The HTML object
+ * @param {HTMLElement} element The HTML object
  * @param {string} text The text that should be inserted into the HTML object
  */
 export function setInnerText (element, text) {
     if (element){
-        element["innerText"] = text;
+        element.innerText = text;
     }
 }

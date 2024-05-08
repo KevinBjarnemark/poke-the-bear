@@ -70,8 +70,8 @@ function resetGame (globalHTML, globalVariables) {
  * This sets the error elements if the username 
  * fails the validation tests.
  * 
- * @param {bool} globalHTML 
- * @param {str} globalVariables 
+ * @param {Object} globalHTML 
+ * @param {Object} globalVariables 
  * @returns {boolean} Returns true is the username is accepted
  */
 function validateUsername (globalHTML, globalVariables) {
@@ -162,7 +162,7 @@ function handleAddPlayerButtonClick (globalHTML, globalVariables) {
             // Errors are handled in the validateUsername function
             break;
         }
-        // There are more than 10 players
+        // There are more than 150 players
         case globalHTML.playerList.children.length > 150: {
             setInnerText(globalHTML.addPlayerError, 
                 "The limit for this game is 150 players");
