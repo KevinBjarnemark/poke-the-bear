@@ -95,7 +95,7 @@ As of right now, javascript functions are heavily tested and precautions (eg. if
 At the landing page/start menu and perhaps accessible inside the game, a 'settings area' should be considered to both solve problems and to enhance the user experience. Here's a breakdown of some of the settings that could be implemented. 
 
 ##### **Sound** 
-- To both amplify the accessibility and enhance the user experience, sounds should be implemented. A voice that tells the players which turn it is and in-game sounds eg. when the rage meter is increasing.
+- To both amplify the accessibility and enhance the user experience, sounds should be implemented. A voice that tells the players whose turn it is and in-game sounds eg. when the rage meter is increasing.
 
 ##### **Temperament meter** 
 
@@ -171,7 +171,7 @@ The bear is drawn from imagination, although I did a quick Google search beforeh
 
 ## Testing 
 
-Here's the tools used to test this project against performance issues, accessibility, best practices, seo, and so forth.
+Here's the tools used to test this project against performance issues, accessibility, best practices, SEO, and so forth.
 
 - [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
 - [W3C validator](https://validator.w3.org/)
