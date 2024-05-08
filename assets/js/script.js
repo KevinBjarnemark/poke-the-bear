@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         pokeButton: document.getElementById("poke-button"),
         playerHint: document.getElementById("player-hint"),
         playerHintEm: document.getElementById("player-hint-em"),
-        bearImage: document.getElementById("bear").children[0],
+        bearImage: document.getElementById("bear-image"),
         playerList: document.getElementById("player-list"),
         playButtonError: document.getElementById("play-button-error"),
         addPlayerError: document.getElementById("add-player-error"),
