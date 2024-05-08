@@ -23,13 +23,13 @@ on their phone or computer to randomly choose one lucky winner. The one who surv
 
 Since the winner is chosen randomly, a larger range of people can take part in the draw without the sensation of unfairness. Allowing children to have a chance against adults, as well as people with different kinds of disabilities, etc.
 
-Click [here](https://kevinbjarnemark.github.io/poke-the-bear/) to visit the deployed version of this website.
-
-!["Preview of the website on different screen sizes"](assets/images/readMe/screen_sizes.webp "Layout")
-
 #### Definition
 **Poke the bear** - To deliberately provoke or antagonize a person or group, esp. one that is dangerous or powerful. 
 [Source](https://www.oed.com/dictionary/bear_n1?tab=meaning_and_use#1266599020)
+
+Click [here](https://kevinbjarnemark.github.io/poke-the-bear/) to visit the deployed version of this website.
+
+!["Preview of the website on different screen sizes"](assets/images/readme/screen_sizes.webp "Preview")
 
 ## Rules/instructions
 
