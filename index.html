@@ -33,9 +33,9 @@
         </div>
         <!-- Welcome screen -->
         <div id="welcome-screen" class="main-area">
-            <h1>Welcome!</h1>
-            <h1>To</h1>
-            <h1>Poke the bear!</h1>
+            <div class="page-title" style="color: var(--green);">Welcome!</div>
+            <div class="page-title">To</div>
+            <div class="page-title">Poke the bear!</div>
         </div>
         <!-- Game setup -->
         <div id="game-setup" class="main-area">
@@ -70,25 +70,36 @@
         <!-- Game area -->
         <div id="game-area" class="main-area">
             <!-- Player hint -->
-            <div id="player-hint"></div>
+            <section>
+                <h2 class="hidden-heading">In-game hints</h2>
+                <div id="player-hint"></div>
+            </section>
             <!-- Rage meter -->
-            <div id="rage-meter">
-                <div id="filled-rage-meter"></div>
-                <h3><em>Rage</em> meter</h3>
-            </div>
+            <section>
+                <h2 class="hidden-heading">Rage meter</h2>
+                <div id="rage-meter">
+                    <div id="filled-rage-meter"></div>
+                    <h3><em>Rage</em> meter</h3>
+                </div>
+            </section>
             <!-- The bear -->
-            <div id="bear">
+            <section id="bear">
+                <h2 class="hidden-heading">Bear animation</h2>
                 <img src="assets/images/bear/bear_0.webp" width="1080" height="1080" 
                     alt="A bear lying down">
-            </div>
+            </section>
+
             <!-- Poke button -->
-            <div id="poke-button-container">
-                <h3>Poke</h3>
-                <button id="poke-button">
-                    <img src="assets/images/icons/poking_stick.webp" width="256" height="256" 
-                        alt="A poking stick">
-                </button>
-            </div>
+            <section>
+                <h2 class="hidden-heading">Poke button</h2>
+                <div id="poke-button-container">
+                    <h3>Poke</h3>
+                    <button id="poke-button">
+                        <img src="assets/images/icons/poking_stick.webp" width="256" height="256" 
+                            alt="A poking stick">
+                    </button>
+                </div>
+            </section>
         </div>
     </main>
     

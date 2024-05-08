@@ -134,10 +134,13 @@ label {
     justify-content: center;
     align-items: center;
     color: var(--light-blue-tint);
-    font-size: 10px;
 }
-#welcome-screen h1:first-child {
-    color: var(--green);
+
+.page-title {
+    font-family: "Luckiest Guy", sans-serif;
+    font-size: 100%;
+    font-weight: 100;
+    text-align: center;
 }
 
 /* Game setup */
@@ -225,7 +228,7 @@ label {
 /* Game area */
 #game-area {
     display: none; /* Hidden by default */
-        box-shadow: 0 0 1px 1px #7e868d
+    box-shadow: 0 0 1px 1px #7e868d
 }
 
 /* Player hint */
@@ -361,8 +364,8 @@ label {
 
 /* 200px width and above */ 
 @media screen and (min-width: 200px) {
-    #welcome-screen {
-        font-size: 100%;
+    .page-title {
+        font-size: 120%;
     }
     /* Player list */
     #player-list-container {
@@ -384,6 +387,9 @@ label {
 
 /* 350px width and above */ 
 @media screen and (min-width: 320px) {
+    .page-title {
+        font-size: 150%;
+    }
     /* Game set up elements */
     #game-setup #player-list-section {
         top: 2vh;
@@ -443,6 +449,9 @@ label {
 
 /* 768px width and above */
 @media screen and (min-width: 768px) {
+    .page-title {
+        font-size: 200%;
+    }
     /* Rage meter */
     #rage-meter {
         top: 13vh;
