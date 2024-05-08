@@ -246,6 +246,8 @@ label {
     align-items: center;
     font-size: 95%;
     transition: transform 0.1s;
+    word-break: break-all;
+    padding: 0px 10px
 }
 /* Make the username stand out */
 #player-hint :first-child {

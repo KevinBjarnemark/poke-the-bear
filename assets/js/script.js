@@ -253,6 +253,7 @@ function pickNewPlayer (globalHTML, globalVariables) {
 async function handlePoke (globalHTML, globalVariables) {
     // Disable poke button to prevent unwanted user clicks
     globalHTML.pokeButton.disabled = true;
+
     // Poke button transition effect 
     globalHTML.pokeButton.style.transform = "scale(0.9)";
     await waitMs(50);
